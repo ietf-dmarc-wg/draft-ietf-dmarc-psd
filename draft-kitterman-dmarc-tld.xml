@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+
+<?rfc toc="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
+
+<rfc category="info"
+     docName="draft-kitterman-dmarc-tld-00"
+     ipr="trust200902"
+     updates="7489">
+
+ <front>
+   <title abbrev="TLD DMARC">DMARC (Domain-based Message Authentication, 
+       Reporting, and Conformance) Extension For TLDs (Top Level Domains)
+   </title>
+
+   <author initials="S." surname="Kitterman"
+	   fullname="Scott Kitterman">
+      <organization>Kitterman Technical Services</organization>
+
+      <address>
+	 <postal>
+	    <street>3611 Scheel Dr</street>
+	    <city>Ellicott City</city>
+	    <region>MD</region>
+	    <code>21042</code>
+	    <country>United States of America</country>
+	 </postal>
+	    
+	 <phone>+1 301 325-5475</phone>
+	 <email>scott@kitterman.com</email>
+      </address>
+   </author>
+
+   <date month="August" year="2018" />
+
+   <keyword>DMARC</keyword>
+   <keyword>email authentication</keyword>
+   <keyword>TLD</keyword>
+
+   <abstract>
+     <t>DMARC (Domain-based Message Authentication, Reporting, and Conformance) 
+         is a scalable mechanism by which a mail-originating organization can
+         express domain-level policies and preferences for message validation,
+         disposition, and reporting, that a mail-receiving organization can use
+         to improve mail handling.  DMARC itself does not apply to TLDs (Top
+         Level Domains).  For the subset of TLDs that require DMARC usage, it is
+         appropriate to provide TLD level DMARC capability.  This memo describes
+         an extension to DMARC to enable a subset of DMARC functionality for
+         such TLDs.</t>
+   </abstract>
+ </front>
+
+ <middle>
+   <section anchor="intro" title="Introduction">
+     <t><xref target="RFC7489">DMARC</xref> provides email sending
+         organizational policy information to email receivers.  Due to the
+         design of <xref target="RFC7489">DMARC</xref> and the nature of the
+         Internet <xref target="RFC5598">email architecture</xref>, there are
+         interoperability issues associated with <xref target="RFC7489">
+         DMARC</xref> deployment.  These are discused in <xref target="RFC7960">
+         Interoperability Issues between DMARC and Indirect Email Flows</xref>.
+         These issues are not applicable to TLDs, since they do not send mail.
+     </t>
+
+     <t><xref target="RFC7489">DMARC</xref>, by design, does not support
+         requirements of TLD operators.  For TLDs that require use of
+         <xref target="RFC7489">DMARC</xref>, a subset of DMARC reporting and
+         enforcement capability is needed for TLD operators to effectively
+         manage and monitor implementation of TLD requirements.
+     </t>
+     
+     <t>Additionally, the ability to extend <xref target="RFC7489">DMARC</xref>
+         policy to operate against non-existent domains would enhance its
+         utility for TLD Operators as well as Domain Owners.  Originally,
+         <xref target="RFC7489">DMARC</xref> included this functionality, but it
+         was removed after significant operational issues were discovered.  This
+         memo adds a new <xref target="RFC7489">DMARC</xref> record tag to
+         provide this capability on an optional, opt-in basis.
+     </t>
+
+   </section>
+   
+   <section title="Terminology and Definitions">
+       <t>This section defines terms used in the rest of the document.
+       </t>
+       <section title="Conventions Used in This Document">
+           <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+               NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
+               "MAY", and "OPTIONAL" in this document are to be interpreted as
+               described in BCP&nbsp;14 <xref target="RFC2119"/>
+               <xref target="RFC8174"/>  when, and only when, they appear in all
+               capitals, as shown here.
+           </t>
+       </section>
+       <section title="Top Level Domain (TLD)">
+           <t>The global Internet Domain Name System (DNS) is documented in
+               numerous Requests for Comment (RFC).  It defines a tree of names
+               starting with root, ".", immediately below which are Top Level
+               Domain names such as ".com" and ".us".
+           </t>
+       </section>
+       <section title="TLD Operator (TLDO)">
+           <t>A TLD Operator manages operations within their TLD based on
+               guidance and rules from ICANN (Internet Corporation for Assigned
+               Names and Numbers).
+           </t>
+       </section>
+       <section title="TLDO Controlled Domain Names">
+           <t>TLDO Controlled Domain Names are names in the DNS that are
+               managed by TLDOs and not available for use as organizational
+               domains (the term organizational domains is defined in <xref
+               target="RFC7489">DMARC</xref>).  Depending on TLD policy, these
+               will have one (e.g. ".com") or more (e.g. ".co.uk") or more name
+               components.
+           </t>
+       </section>
+       <section title="Non-existent Domains">
+           <t>For <xref target="RFC7489">DMARC</xref> purposes, a non-existent
+               domain is a domain name that publishes none of A, AAAA, or MX
+               records.  This is a broader definition than that in <xref
+               target="RFC8020">NXDOMAIN</xref>.
+           </t>
+       </section>
+   </section>
+
+   <section title="TLD DMARC Updates to DMARC Requirements">
+
+     <t>This document updates <xref target="RFC7489">DMARC</xref> as follows:</t>
+
+     <section title="General Updates">
+         <t>References to "Domain Owners" also apply to TLDOs.</t>
+     </section>
+     <section title="Section 6.1 DMARC Policy Record">
+         <t>TLD DMARC records are published as a subdomain of the TLD.  For the
+             TLD ".example", the TLDO would post DMARC preferences in a TXT
+             record at "_dmarc.example".
+         </t>
+     </section>
+     <section title="Section 6.3.  General Record Format">
+         <t>The rf and ruf tags are not applicable to TLD DMARC and MUST be
+             ignored for TLD records.
+         </t>
+     </section>
+     <section title="Section 6.5.  Domain Owner Actions">
+         <t>In addition to the <xref target="RFC7489">DMARC</xref> domain owner
+             actions, TLDOs will need to update the "DMARC TLD Registry".  See
+             IANA Considerations below.
+         </t>
+     </section>
+     <section title="Section 6.6.3.  Policy Discovery">
+         <t>A new step between step 3 and 4 is added:</t>
+         <t><list style="hanging">
+               <t hangText="3A.">If the set is now empty and the TLD of the
+                   Organizational Domain is listed in the DMARC TLD Registry,
+                   the Mail Receiver MUST query the DNS for a DMARC TXT record
+                   at the DNS domain matching the TLD in place of the
+                   RFC5322.From domain in the message (if different).  This
+                   record can contain policy to be asserted for subdomains of
+                   the TLD.  A possibly empty set of records is returned.
+               </t>
+         </list> </t>
+     </section>
+     <section title="7.3.  Failure Reports">
+         <t>This section is not applicable to records identified via policy
+             discovery step 3A.
+         </t>
+     </section>
+   </section>
+   
+   <section title="Non-existent Domain Requirements">
+       <section title="Section 6.3.  General Record Format">
+           <t>A new "np" tag is added:</t>
+           <t><list style="hanging">
+               <t hangText="np:">Requested Mail Receiver policy for all
+                   non-existent domains (plain-text; OPTIONAL).  Indicates the
+                   policy to be enacted by the Receiver at
+      the request of the Domain Owner.  It applies only to subdomains of the
+      domain queried and not to the domain itself.  Its syntax is identical to
+      that of the "p" tag defined above.  If absent, DMARC policy MUST NOT be
+      applied for non-existent domains.</t>
+           </list> </t>
+       </section>
+   </section>
+
+   <section title="Privacy Considerations">
+      <t> This document does not change significantly change the Privacy
+          Considerations of <xref target="RFC7489"/>.  Privacy considerations
+          related to Failure Reports do not apply to TLD DMARC.
+      </t>
+   </section>
+
+   <section title="Security Considerations">
+      <t> This document does not change the Security Considerations of
+      <xref target="RFC7489"/>.</t>
+   </section>
+
+   <section title="IANA Considerations">
+       <t>This section describes actions requested to be completed by IANA.</t>
+
+       <section title="DMARC Tag Registry Update">
+           <t>IANA is requested to add the following item to the registry:</t>
+            <texttable>
+                <ttcol align="center">Tag Name</ttcol>
+                <ttcol align="left">Reference</ttcol>
+                <ttcol align="left">Status</ttcol>
+                <ttcol align="left">Description</ttcol>
+                <c>np</c>
+                <c>this document</c>
+                <c>current</c>
+                <c>Requested handling policy for non-existent domains</c>
+            </texttable>
+       </section>
+       <section title="DMARC Top Level Domain (TLD) Registry">
+           <t>IANA is requested to create a new DMARC Top Level Domain (TLD)
+               Registry within the Domain-based Message Authentication,
+               Reporting, and Conformance (DMARC) Parameters Registry.
+           </t>
+           <t>Names of TLDs participating in TLD DMARC must be registered with
+               IANA in this new sub-registry.  New entries are assigned only for
+               TLDs that require use of DMARC.  The requirement has to be
+               documented in a manner that satisfies the terms of Expert Review,
+               per <xref target="RFC5226"/>.  The Designated Expert needs to
+               confirm that provided documentation adequately describes TLD
+               policy to require domain owners to use DMARC.
+           </t>
+           <t>The initial set of entries in this registry is as follows:
+            <figure><artwork>
++-------------+----------------+---------------+
+|    TLD      | Reference      | Status        |
++-------------+----------------+---------------+
+| .bank       | this document  | current       |
++-------------+----------------+---------------+
+| .insurance  | this document  | current       |
++-------------+----------------+---------------+
+                                </artwork> </figure>
+           </t>
+       </section>
+   </section>
+ </middle>
+
+ <back>
+   <references title="Normative References">
+      <?rfc include="reference.RFC.2119" ?>
+      <?rfc include="reference.RFC.7489" ?>
+      <?rfc include="reference.RFC.8174" ?>
+   </references>
+
+   <references title="Informative References">
+      <?rfc include="reference.RFC.5226" ?>
+      <?rfc include="reference.RFC.5598" ?>
+      <?rfc include="reference.RFC.7960" ?>
+      <?rfc include="reference.RFC.8020" ?>
+
+   </references>
+   <section anchor="thanks" title="Acknowledgements" numbered="no">
+      <t> TBS </t>
+    </section>
+ </back>
+</rfc>
