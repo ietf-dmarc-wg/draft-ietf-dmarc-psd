@@ -166,6 +166,15 @@
                </t>
          </list> </t>
      </section>
+     <section title="7.2.  Aggregate Reports">
+         <t>NOTE: We would like to modify this section to allow multiple
+             nxdomain subdomain reports to be reported in a single report.  This
+             would also require changes in the Appendix C XML schema.  Recommend
+             defering this to discussion in the IETF DMARC working group where
+             the authors of the original design that disallows this can weigh
+             in.
+         </t>
+     </section>
      <section title="7.3.  Failure Reports">
          <t>This section is not applicable to records identified via policy
              discovery step 3A.
