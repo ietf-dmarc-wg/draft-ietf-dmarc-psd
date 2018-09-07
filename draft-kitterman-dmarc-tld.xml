@@ -140,11 +140,6 @@
              record at "_dmarc.example".
          </t>
      </section>
-     <section title="Section 6.3.  General Record Format">
-         <t>The rf and ruf tags are not applicable to TLD DMARC and MUST be
-             ignored for TLD records.
-         </t>
-     </section>
      <section title="Section 6.5.  Domain Owner Actions">
          <t>In addition to the <xref target="RFC7489">DMARC</xref> domain owner
              actions, TLDOs will need to update the "DMARC Top Level Domain
@@ -165,22 +160,7 @@
                </t>
          </list> </t>
      </section>
-     <section title="7.2.  Aggregate Reports">
-         <t>NOTE: We would like to modify this section to allow multiple
-             nxdomain subdomain reports to be reported in a single report.  This
-             would also require changes in the Appendix C XML schema.  Recommend
-             deferring this to discussion in the IETF DMARC working group where
-             the authors of the original design that disallows this can weigh
-             in.
-         </t>
-     </section>
-     <section title="7.3.  Failure Reports">
-         <t>This section is not applicable to records identified via policy
-             discovery step 3A.
-         </t>
-     </section>
-   </section>
-   
+
    <section title="Non-existent Domain Requirements">
        <section title="Section 6.3.  General Record Format">
            <t>A new "np" tag is added:</t>
