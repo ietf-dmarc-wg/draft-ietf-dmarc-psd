@@ -116,7 +116,7 @@
                managed by TLDOs and not available for use as organizational
                domains (the term organizational domains is defined in <xref
                target="RFC7489">DMARC</xref>).  Depending on TLD policy, these
-               will have one (e.g. ".com") or more (e.g. ".co.uk") or more name
+               will have one (e.g. ".com") or more (e.g. ".co.uk") name
                components.
            </t>
        </section>
@@ -149,8 +149,9 @@
      </section>
      <section title="Section 6.5.  Domain Owner Actions">
          <t>In addition to the <xref target="RFC7489">DMARC</xref> domain owner
-             actions, TLDOs will need to update the "DMARC TLD Registry".  See
-             IANA Considerations below.
+             actions, TLDOs will need to update the "DMARC Top Level Domain
+             (TLD) Registry".  This registry is defined in <xref
+             target="iana2"/>.
          </t>
      </section>
      <section title="Section 6.6.3.  Policy Discovery">
@@ -170,7 +171,7 @@
          <t>NOTE: We would like to modify this section to allow multiple
              nxdomain subdomain reports to be reported in a single report.  This
              would also require changes in the Appendix C XML schema.  Recommend
-             defering this to discussion in the IETF DMARC working group where
+             deferring this to discussion in the IETF DMARC working group where
              the authors of the original design that disallows this can weigh
              in.
          </t>
@@ -198,7 +199,7 @@
    </section>
 
    <section title="Privacy Considerations">
-      <t> This document does not change significantly change the Privacy
+      <t> This document does not significantly change the Privacy
           Considerations of <xref target="RFC7489"/>.  Privacy considerations
           related to Failure Reports do not apply to TLD DMARC.
       </t>
@@ -209,10 +210,10 @@
       <xref target="RFC7489"/>.</t>
    </section>
 
-   <section title="IANA Considerations">
+   <section anchor="iana" title="IANA Considerations">
        <t>This section describes actions requested to be completed by IANA.</t>
 
-       <section title="DMARC Tag Registry Update">
+       <section anchor="iana1" title="DMARC Tag Registry Update">
            <t>IANA is requested to add the following item to the registry:</t>
             <texttable>
                 <ttcol align="center">Tag Name</ttcol>
@@ -225,7 +226,7 @@
                 <c>Requested handling policy for non-existent domains</c>
             </texttable>
        </section>
-       <section title="DMARC Top Level Domain (TLD) Registry">
+       <section anchor="iana2" title="DMARC Top Level Domain (TLD) Registry">
            <t>IANA is requested to create a new DMARC Top Level Domain (TLD)
                Registry within the Domain-based Message Authentication,
                Reporting, and Conformance (DMARC) Parameters Registry.
