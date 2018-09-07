@@ -106,9 +106,7 @@
            </t>
        </section>
        <section title="TLD Operator (TLDO)">
-           <t>A TLD Operator manages operations within their TLD based on
-               guidance and rules from ICANN (Internet Corporation for Assigned
-               Names and Numbers).
+           <t>A TLD Operator manages operations within their TLD.
            </t>
        </section>
        <section title="TLDO Controlled Domain Names">
