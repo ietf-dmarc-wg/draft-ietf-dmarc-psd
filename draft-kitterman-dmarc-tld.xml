@@ -160,7 +160,7 @@
                </t>
          </list> </t>
      </section>
-
+   </section>
    <section title="Non-existent Domain Requirements">
        <section title="Section 6.3.  General Record Format">
            <t>A new "np" tag is added:</t>
