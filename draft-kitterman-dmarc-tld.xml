@@ -74,18 +74,9 @@
          enforcement capability is needed for TLD operators to effectively
          manage and monitor implementation of TLD requirements.
      </t>
-     
-     <t>Additionally, the ability to extend <xref target="RFC7489">DMARC</xref>
-         policy to operate against non-existent domains would enhance its
-         utility for TLD Operators as well as Domain Owners.  Originally,
-         <xref target="RFC7489">DMARC</xref> included this functionality, but it
-         was removed after significant operational issues were discovered.  This
-         memo adds a new <xref target="RFC7489">DMARC</xref> record tag to
-         provide this capability on an optional, opt-in basis.
-     </t>
 
    </section>
-   
+
    <section title="Terminology and Definitions">
        <t>This section defines terms used in the rest of the document.
        </t>
@@ -118,13 +109,6 @@
                components.
            </t>
        </section>
-       <section title="Non-existent Domains">
-           <t>For <xref target="RFC7489">DMARC</xref> purposes, a non-existent
-               domain is a domain name that publishes none of A, AAAA, or MX
-               records.  This is a broader definition than that in <xref
-               target="RFC8020">NXDOMAIN</xref>.
-           </t>
-       </section>
    </section>
 
    <section title="TLD DMARC Updates to DMARC Requirements">
@@ -144,7 +128,7 @@
          <t>In addition to the <xref target="RFC7489">DMARC</xref> domain owner
              actions, TLDOs will need to update the "DMARC Top Level Domain
              (TLD) Registry".  This registry is defined in <xref
-             target="iana2"/>.
+             target="iana1"/>.
          </t>
      </section>
      <section title="Section 6.6.3.  Policy Discovery">
@@ -160,20 +144,6 @@
                </t>
          </list> </t>
      </section>
-   </section>
-   <section title="Non-existent Domain Requirements">
-       <section title="Section 6.3.  General Record Format">
-           <t>A new "np" tag is added:</t>
-           <t><list style="hanging">
-               <t hangText="np:">Requested Mail Receiver policy for all
-                   non-existent domains (plain-text; OPTIONAL).  Indicates the
-                   policy to be enacted by the Receiver at
-      the request of the Domain Owner.  It applies only to subdomains of the
-      domain queried and not to the domain itself.  Its syntax is identical to
-      that of the "p" tag defined above.  If absent, DMARC policy MUST NOT be
-      applied for non-existent domains.</t>
-           </list> </t>
-       </section>
    </section>
 
    <section title="Privacy Considerations">
@@ -191,20 +161,7 @@
    <section anchor="iana" title="IANA Considerations">
        <t>This section describes actions requested to be completed by IANA.</t>
 
-       <section anchor="iana1" title="DMARC Tag Registry Update">
-           <t>IANA is requested to add the following item to the registry:</t>
-            <texttable>
-                <ttcol align="center">Tag Name</ttcol>
-                <ttcol align="left">Reference</ttcol>
-                <ttcol align="left">Status</ttcol>
-                <ttcol align="left">Description</ttcol>
-                <c>np</c>
-                <c>this document</c>
-                <c>current</c>
-                <c>Requested handling policy for non-existent domains</c>
-            </texttable>
-       </section>
-       <section anchor="iana2" title="DMARC Top Level Domain (TLD) Registry">
+       <section anchor="iana1" title="DMARC Top Level Domain (TLD) Registry">
            <t>IANA is requested to create a new DMARC Top Level Domain (TLD)
                Registry within the Domain-based Message Authentication,
                Reporting, and Conformance (DMARC) Parameters Registry.
@@ -243,7 +200,6 @@
       <?rfc include="reference.RFC.5226" ?>
       <?rfc include="reference.RFC.5598" ?>
       <?rfc include="reference.RFC.7960" ?>
-      <?rfc include="reference.RFC.8020" ?>
 
    </references>
    <section anchor="thanks" title="Acknowledgements" numbered="no">
