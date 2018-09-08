@@ -154,10 +154,32 @@
    </section>
 
    <section title="Privacy Considerations">
-      <t> This document does not significantly change the Privacy
-          Considerations of <xref target="RFC7489"/>.  Privacy considerations
-          related to Failure Reports do not apply to TLD DMARC.
+      <t>This document does not significantly change the Privacy
+          Considerations of <xref target="RFC7489"/>.
       </t>
+      <section title="Feedback leakage to TLDO">
+          <t>With the exception of branded TLDs (e.g. ".google"), RUA and RUF
+              reports based on TLD DMARC have the potential to contain
+              information about emails related to multiple organizations.  As a
+              result, privacy sensitive information might be leaked from a
+              domain owning organization to the TLDO.
+          </t>
+          <t>This is not an issue for organizational domains that publish DMARC
+              policy.  For such domains, the feedback reporting addresses (RUA
+              and RUF) of the organization will be used.  Since TLD DMARC is
+              limited to TLDs that mandate organizational domains publish DMARC
+              policy, the risk of this issue is limited to organizational
+              domains that are out of compliance with TLD policy.
+          </t>
+          <t>TLDOs will receive feedback on non-existant domains, which may be
+              similar to existing organizational domains.  Feedback related to
+              such cousin domains have a small risk of carrying information
+              related to an actual organizational domain.  To minimize this
+              potential concern, TLD DMARC feedback is best limited to
+              Aggregate Reports.  Feedback Reports carry more detailed
+              information and present a greater risk.
+          </t>
+      </section>
    </section>
 
    <section title="Security Considerations">
