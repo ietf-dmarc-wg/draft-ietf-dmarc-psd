@@ -137,12 +137,16 @@
                <t hangText="3A.">If the set is now empty and the TLD of the
                    Organizational Domain is listed in the DMARC TLD Registry,
                    the Mail Receiver MUST query the DNS for a DMARC TXT record
-                   at the DNS domain matching the TLD in place of the
-                   RFC5322.From domain in the message (if different).  This
-                   record can contain policy to be asserted for subdomains of
-                   the TLD.  A possibly empty set of records is returned.
+                   at the DNS domain matching the Organizational Domain with one
+                   label removed in place of the RFC5322.From domain in the
+                   message (if different).  A possibly empty set of records is
+                   returned.
                </t>
          </list> </t>
+         <t>As an example, for a message with the Organizational Domain of
+             "example.compute.amazonaws.com.cn", the query for TLD DMARC would
+             use "_dmarc.compute.amazonaws.com.cn".
+         </t>
      </section>
    </section>
 
