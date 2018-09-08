@@ -1,0 +1,336 @@
+
+
+
+
+Network Working Group                                       S. Kitterman
+Internet-Draft                              Kitterman Technical Services
+Updates: 7489 (if approved)                            September 8, 2018
+Intended status: Informational
+Expires: March 12, 2019
+
+
+DMARC (Domain-based Message Authentication, Reporting, and Conformance)
+                 Extension For TLDs (Top Level Domains)
+                      draft-kitterman-dmarc-tld-00
+
+Abstract
+
+   DMARC (Domain-based Message Authentication, Reporting, and
+   Conformance) is a scalable mechanism by which a mail-originating
+   organization can express domain-level policies and preferences for
+   message validation, disposition, and reporting, that a mail-receiving
+   organization can use to improve mail handling.  DMARC itself does not
+   apply to TLDs (Top Level Domains).  For the subset of TLDs that
+   require DMARC usage, it is appropriate to provide TLD level DMARC
+   capability.  This memo describes an extension to DMARC to enable a
+   subset of DMARC functionality for such TLDs.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on March 12, 2019.
+
+Copyright Notice
+
+   Copyright (c) 2018 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+
+
+
+Kitterman                Expires March 12, 2019                 [Page 1]
+
+Internet-Draft                  TLD DMARC                 September 2018
+
+
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+   2.  Terminology and Definitions . . . . . . . . . . . . . . . . .   3
+     2.1.  Conventions Used in This Document . . . . . . . . . . . .   3
+     2.2.  Top Level Domain (TLD)  . . . . . . . . . . . . . . . . .   3
+     2.3.  TLD Operator (TLDO) . . . . . . . . . . . . . . . . . . .   3
+     2.4.  TLDO Controlled Domain Names  . . . . . . . . . . . . . .   3
+   3.  TLD DMARC Updates to DMARC Requirements . . . . . . . . . . .   3
+     3.1.  General Updates . . . . . . . . . . . . . . . . . . . . .   3
+     3.2.  Section 6.1 DMARC Policy Record . . . . . . . . . . . . .   3
+     3.3.  Section 6.5.  Domain Owner Actions  . . . . . . . . . . .   4
+     3.4.  Section 6.6.3.  Policy Discovery  . . . . . . . . . . . .   4
+   4.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   4
+     4.1.  Feedback leakage to TLDO  . . . . . . . . . . . . . . . .   4
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
+     6.1.  DMARC Top Level Domain (TLD) Registry . . . . . . . . . .   5
+   7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     7.1.  Normative References  . . . . . . . . . . . . . . . . . .   5
+     7.2.  Informative References  . . . . . . . . . . . . . . . . .   6
+   Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .   6
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   6
+
+1.  Introduction
+
+   DMARC [RFC7489] provides email sending organizational policy
+   information to email receivers.  Due to the design of DMARC [RFC7489]
+   and the nature of the Internet email architecture [RFC5598], there
+   are interoperability issues associated with DMARC [RFC7489]
+   deployment.  These are discused in Interoperability Issues between
+   DMARC and Indirect Email Flows [RFC7960].  These issues are not
+   applicable to TLDs, since they do not send mail.
+
+   DMARC [RFC7489], by design, does not support requirements of TLD
+   operators.  For TLDs that require use of DMARC [RFC7489], a subset of
+   DMARC reporting and enforcement capability is needed for TLD
+   operators to effectively manage and monitor implementation of TLD
+   requirements.
+
+
+
+
+
+Kitterman                Expires March 12, 2019                 [Page 2]
+
+Internet-Draft                  TLD DMARC                 September 2018
+
+
+2.  Terminology and Definitions
+
+   This section defines terms used in the rest of the document.
+
+2.1.  Conventions Used in This Document
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174]  when, and only when, they appear in all
+   capitals, as shown here.
+
+2.2.  Top Level Domain (TLD)
+
+   The global Internet Domain Name System (DNS) is documented in
+   numerous Requests for Comment (RFC).  It defines a tree of names
+   starting with root, ".", immediately below which are Top Level Domain
+   names such as ".com" and ".us".
+
+2.3.  TLD Operator (TLDO)
+
+   A TLD Operator manages operations within their TLD.
+
+2.4.  TLDO Controlled Domain Names
+
+   TLDO Controlled Domain Names are names in the DNS that are managed by
+   TLDOs and not available for use as organizational domains (the term
+   organizational domains is defined in DMARC [RFC7489]).  Depending on
+   TLD policy, these will have one (e.g. ".com") or more (e.g. ".co.uk")
+   name components.
+
+3.  TLD DMARC Updates to DMARC Requirements
+
+   This document updates DMARC [RFC7489] as follows:
+
+3.1.  General Updates
+
+   References to "Domain Owners" also apply to TLDOs.
+
+3.2.  Section 6.1 DMARC Policy Record
+
+   TLD DMARC records are published as a subdomain of the TLD.  For the
+   TLD ".example", the TLDO would post DMARC preferences in a TXT record
+   at "_dmarc.example".
+
+
+
+
+
+
+
+Kitterman                Expires March 12, 2019                 [Page 3]
+
+Internet-Draft                  TLD DMARC                 September 2018
+
+
+3.3.  Section 6.5.  Domain Owner Actions
+
+   In addition to the DMARC [RFC7489] domain owner actions, TLDOs will
+   need to update the "DMARC Top Level Domain (TLD) Registry".  This
+   registry is defined in Section 6.1.
+
+3.4.  Section 6.6.3.  Policy Discovery
+
+   A new step between step 3 and 4 is added:
+
+   3A.  If the set is now empty and the TLD of the Organizational Domain
+      is listed in the DMARC TLD Registry, the Mail Receiver MUST query
+      the DNS for a DMARC TXT record at the DNS domain matching the
+      Organizational Domain with one label removed in place of the
+      RFC5322.From domain in the message (if different).  A possibly
+      empty set of records is returned.
+
+   As an example, for a message with the Organizational Domain of
+   "example.compute.amazonaws.com.cn", the query for TLD DMARC would use
+   "_dmarc.compute.amazonaws.com.cn".
+
+4.  Privacy Considerations
+
+   This document does not significantly change the Privacy
+   Considerations of [RFC7489].
+
+4.1.  Feedback leakage to TLDO
+
+   With the exception of branded TLDs (e.g. ".google"), RUA and RUF
+   reports based on TLD DMARC have the potential to contain information
+   about emails related to multiple organizations.  As a result, privacy
+   sensitive information might be leaked from a domain owning
+   organization to the TLDO.
+
+   This is not an issue for organizational domains that publish DMARC
+   policy.  For such domains, the feedback reporting addresses (RUA and
+   RUF) of the organization will be used.  Since TLD DMARC is limited to
+   TLDs that mandate organizational domains publish DMARC policy, the
+   risk of this issue is limited to organizational domains that are out
+   of compliance with TLD policy.
+
+   TLDOs will receive feedback on non-existant domains, which may be
+   similar to existing organizational domains.  Feedback related to such
+   cousin domains have a small risk of carrying information related to
+   an actual organizational domain.  To minimize this potential concern,
+   TLD DMARC feedback is best limited to Aggregate Reports.  Feedback
+   Reports carry more detailed information and present a greater risk.
+
+
+
+
+Kitterman                Expires March 12, 2019                 [Page 4]
+
+Internet-Draft                  TLD DMARC                 September 2018
+
+
+5.  Security Considerations
+
+   This document does not change the Security Considerations of
+   [RFC7489].
+
+6.  IANA Considerations
+
+   This section describes actions requested to be completed by IANA.
+
+6.1.  DMARC Top Level Domain (TLD) Registry
+
+   IANA is requested to create a new DMARC Top Level Domain (TLD)
+   Registry within the Domain-based Message Authentication, Reporting,
+   and Conformance (DMARC) Parameters Registry.
+
+   Names of TLDs participating in TLD DMARC must be registered with IANA
+   in this new sub-registry.  New entries are assigned only for TLDs
+   that require use of DMARC.  The requirement has to be documented in a
+   manner that satisfies the terms of Expert Review, per [RFC5226].  The
+   Designated Expert needs to confirm that provided documentation
+   adequately describes TLD policy to require domain owners to use
+   DMARC.
+
+   The initial set of entries in this registry is as follows:
+
+   +-------------+----------------+---------------+
+   |    TLD      | Reference      | Status        |
+   +-------------+----------------+---------------+
+   | .bank       | this document  | current       |
+   +-------------+----------------+---------------+
+   | .insurance  | this document  | current       |
+   +-------------+----------------+---------------+
+
+7.  References
+
+7.1.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
+
+   [RFC7489]  Kucherawy, M., Ed. and E. Zwicky, Ed., "Domain-based
+              Message Authentication, Reporting, and Conformance
+              (DMARC)", RFC 7489, DOI 10.17487/RFC7489, March 2015,
+              <https://www.rfc-editor.org/info/rfc7489>.
+
+
+
+
+
+Kitterman                Expires March 12, 2019                 [Page 5]
+
+Internet-Draft                  TLD DMARC                 September 2018
+
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/info/rfc8174>.
+
+7.2.  Informative References
+
+   [RFC5226]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
+              IANA Considerations Section in RFCs", RFC 5226,
+              DOI 10.17487/RFC5226, May 2008,
+              <https://www.rfc-editor.org/info/rfc5226>.
+
+   [RFC5598]  Crocker, D., "Internet Mail Architecture", RFC 5598,
+              DOI 10.17487/RFC5598, July 2009,
+              <https://www.rfc-editor.org/info/rfc5598>.
+
+   [RFC7960]  Martin, F., Ed., Lear, E., Ed., Draegen. Ed., T., Zwicky,
+              E., Ed., and K. Andersen, Ed., "Interoperability Issues
+              between Domain-based Message Authentication, Reporting,
+              and Conformance (DMARC) and Indirect Email Flows",
+              RFC 7960, DOI 10.17487/RFC7960, September 2016,
+              <https://www.rfc-editor.org/info/rfc7960>.
+
+Acknowledgements
+
+   TBS
+
+Author's Address
+
+   Scott Kitterman
+   Kitterman Technical Services
+   3611 Scheel Dr
+   Ellicott City, MD  21042
+   United States of America
+
+   Phone: +1 301 325-5475
+   Email: scott@kitterman.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Kitterman                Expires March 12, 2019                 [Page 6]
