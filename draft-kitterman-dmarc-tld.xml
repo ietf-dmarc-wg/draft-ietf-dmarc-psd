@@ -171,20 +171,38 @@
       <t>This document does not significantly change the Privacy
           Considerations of <xref target="RFC7489"/>.
       </t>
-      <section title="Feedback leakage to TLDO">
-          <t>With the exception of branded TLDs (e.g. ".google"), RUA and RUF
-              reports based on TLD DMARC have the potential to contain
-              information about emails related to multiple organizations.  As a
-              result, privacy sensitive information might be leaked from a
-              domain owning organization to the TLDO.
+      <section title="Feedback leakage">
+          <t>Providing feedback reporting to TLDOs can, in some cases create
+              leakage of information outside of an organization to the TLDO.
+              There are roughly three cases to consider:
           </t>
-          <t>This is not an issue for organizational domains that publish DMARC
-              policy.  For such domains, the feedback reporting addresses (RUA
-              and RUF) of the organization will be used.  Since TLD DMARC is
-              limited to TLDs that mandate organizational domains publish DMARC
-              policy, the risk of this issue is limited to organizational
-              domains that are out of compliance with TLD policy.
-          </t>
+          <t><list style="symbols">
+                  <t>Branded TLDs (e.g. ".google"), RUA and RUF reports based on
+                      TLD DMARC have the potential to contain information about
+                      emails related to entities managed by the organization,
+                      but since both the TLDO and the organizational domain
+                      owners are common, there is no privacy risk for either
+                      normal or nxdomain reporting.
+                  </t>
+                  <t>Multi-organization TLDs that require DMARC usage (e.g. 
+                      ".bank":  TLD DMARC based reports will only be generated
+                      for domains that do not publish DMARC policy at the
+                      organizational level.  For domains that do publish the
+                      required DMARC policy records, the feedback reporting
+                      addresses (RUA and RUF) of the organization will be used.
+                      Since TLD DMARC is limited to TLDs that mandate
+                      organizational domains publish DMARC policy, the risk of
+                      this issue is limited to organizational domains that are
+                      out of compliance with TLD policy.
+                  </t>
+                  <t>Multi-organization TLDs (e.g. ".com") that do not mandate
+                      DMARC usage.  Privacy risks for organizational domains
+                      within such TLDs would be significant.  This is mitigated
+                      by the limitation of TLD DMARC to exclude such TLDs and
+                      the requirement for a public IANA registry that is
+                      required to exclude such TLDs.
+                  </t>
+          </list></t>
           <t>TLDOs will receive feedback on non-existant domains, which may be
               similar to existing organizational domains.  Feedback related to
               such cousin domains have a small risk of carrying information
@@ -215,7 +233,8 @@
                documented in a manner that satisfies the terms of Expert Review,
                per <xref target="RFC5226"/>.  The Designated Expert needs to
                confirm that provided documentation adequately describes TLD
-               policy to require domain owners to use DMARC.
+               policy to require domain owners to use DMARC or that all domain
+               owners are part of a single organization with the TLDO.
            </t>
            <t>The initial set of entries in this registry is as follows:
             <figure><artwork>
