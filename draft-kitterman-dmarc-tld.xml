@@ -48,11 +48,12 @@
          is a scalable mechanism by which a mail-originating organization can
          express domain-level policies and preferences for message validation,
          disposition, and reporting, that a mail-receiving organization can use
-         to improve mail handling.  DMARC itself does not apply to TLDs (Top
-         Level Domains).  For the subset of TLDs that require DMARC usage, it is
-         appropriate to provide TLD level DMARC capability.  This memo describes
-         an extension to DMARC to enable a subset of DMARC functionality for
-         such TLDs.</t>
+         to improve mail handling.  DMARC itself does not apply to domains above
+         the organizational level, such as TLDs (Top Level Domains).  For the
+         subset of TLDs (or other non-organizational domains) that require DMARC
+         usage, it is appropriate to provide TLD level DMARC capability.  This
+         memo describes an extension to DMARC to enable a subset of DMARC
+         functionality for such domains.</t>
    </abstract>
  </front>
 
@@ -93,7 +94,9 @@
            <t>The global Internet Domain Name System (DNS) is documented in
                numerous Requests for Comment (RFC).  It defines a tree of names
                starting with root, ".", immediately below which are Top Level
-               Domain names such as ".com" and ".us".
+               Domain names such as ".com" and ".us".  The usage for TLD DMARC
+               is broader and includes all domains above the organizational
+               level in the tree, e.g. ".gov.uk".
            </t>
        </section>
        <section title="TLD Operator (TLDO)">
