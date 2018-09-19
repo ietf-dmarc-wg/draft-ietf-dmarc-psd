@@ -158,9 +158,16 @@
              use "_dmarc.compute.amazonaws.com.cn".
          </t>
      </section>
+     <section title="Section 7.  DMARC Feedback">
+         <t>Operational note for TLD DMARC: For TLDOs, feedback for non-existent
+             domains is desired and useful.  Because of the constraints on TLD
+             DMARC scope, there are not sifnificant privacy considerations
+             associated with this reporting (See <xref target="privacy"/>).
+         </t>
+     </section>
    </section>
 
-   <section title="Privacy Considerations">
+   <section anchor="privacy" title="Privacy Considerations">
       <t>This document does not significantly change the Privacy
           Considerations of <xref target="RFC7489"/>.
       </t>
