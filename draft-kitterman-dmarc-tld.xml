@@ -105,7 +105,7 @@
        </section>
        <section title="TLDO Controlled Domain Names">
            <t>TLDO Controlled Domain Names are names in the DNS that are
-               managed by a TLDO and not available for use as Organizational
+               managed by a TLDO and are not available for use as Organizational
                Domains (the term organizational domains is defined in <xref
                target="RFC7489">DMARC</xref>).  Depending on TLD policy, these
                will have one (e.g., ".com") or more (e.g., ".co.uk") name
