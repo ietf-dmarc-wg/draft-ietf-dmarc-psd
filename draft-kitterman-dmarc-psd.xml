@@ -49,10 +49,10 @@
          express domain-level policies and preferences for message validation,
          disposition, and reporting, that a mail-receiving organization can use
          to improve mail handling.  DMARC itself does not apply to domains above
-         the organizational level, such as TLDs (Top Level Domains).  For the
-         subset of TLDs (or other non-organizational domains) that require DMARC
-         usage, it is appropriate to provide TLD level DMARC capability.  This
-         memo describes an extension to DMARC to enable a subset of DMARC
+         the organizational level, such as PSDs (Public Suffix Domains).  For
+         the subset of PSDs (or other non-organizational domains) that require
+         DMARC usage, it is appropriate to provide PSD level DMARC capability.
+         This memo describes an extension to DMARC to enable a subset of DMARC
          functionality for such domains.</t>
    </abstract>
  </front>
@@ -66,14 +66,14 @@
          interoperability issues associated with <xref target="RFC7489">
          DMARC</xref> deployment.  These are discussed in <xref target="RFC7960">
          Interoperability Issues between DMARC and Indirect Email Flows</xref>.
-         These issues are not applicable to TLDs, since they do not send mail.
+         These issues are not applicable to PSDs, since they do not send mail.
      </t>
 
      <t><xref target="RFC7489">DMARC</xref>, by design, does not support
-         requirements of TLD operators.  For TLDs that require use of
+         requirements of PSD operators.  For PSDs that require use of
          <xref target="RFC7489">DMARC</xref>, a subset of DMARC reporting and
-         enforcement capability is needed for TLD operators to effectively
-         manage and monitor implementation of TLD requirements.
+         enforcement capability is needed for PSD operators to effectively
+         manage and monitor implementation of PSD requirements.
      </t>
 
    </section>
@@ -90,24 +90,24 @@
                capitals, as shown here.
            </t>
        </section>
-       <section title="Top Level Domain (TLD)">
+       <section title="Public Suffix Domain (PSD)">
            <t>The global Internet Domain Name System (DNS) is documented in
                numerous Requests for Comment (RFC).  It defines a tree of names
                starting with root, ".", immediately below which are Top Level
-               Domain names such as ".com" and ".us".  The usage for TLD DMARC
+               Domain names such as ".com" and ".us".  The usage for PSD DMARC
                is broader and includes all domains above the organizational
                level in the tree, e.g., ".gov.uk".
            </t>
        </section>
-       <section title="TLD Operator (TLDO)">
-           <t>A TLD Operator manages operations within their TLD.
+       <section title="Public Suffix Operator (PSO)">
+           <t>A PS Operator manages operations within their PSD.
            </t>
        </section>
-       <section title="TLDO Controlled Domain Names">
-           <t>TLDO Controlled Domain Names are names in the DNS that are
-               managed by a TLDO and are not available for use as Organizational
+       <section title="PSO Controlled Domain Names">
+           <t>PSO Controlled Domain Names are names in the DNS that are
+               managed by a PSO and are not available for use as Organizational
                Domains (the term organizational domains is defined in <xref
-               target="RFC7489">DMARC</xref>).  Depending on TLD policy, these
+               target="RFC7489">DMARC</xref>).  Depending on PSD policy, these
                will have one (e.g., ".com") or more (e.g., ".co.uk") name
                components.
            </t>
@@ -121,31 +121,31 @@
        </section>
    </section>
 
-   <section title="TLD DMARC Updates to DMARC Requirements">
+   <section title="PSD DMARC Updates to DMARC Requirements">
 
      <t>This document updates <xref target="RFC7489">DMARC</xref> as follows:</t>
 
      <section title="General Updates">
-         <t>References to "Domain Owners" also apply to TLDOs.</t>
+         <t>References to "Domain Owners" also apply to PSOs.</t>
      </section>
      <section title="Section 6.1 DMARC Policy Record">
-         <t>TLD DMARC records are published as a subdomain of the TLD.  For the
-             TLD ".example", the TLDO would post DMARC preferences in a TXT
+         <t>PSD DMARC records are published as a subdomain of the PSD.  For the
+             PSD ".example", the PSO would post DMARC preferences in a TXT
              record at "_dmarc.example".
          </t>
      </section>
      <section title="Section 6.5.  Domain Owner Actions">
          <t>In addition to the <xref target="RFC7489">DMARC</xref> domain owner
-             actions, TLDOs will need to update the "DMARC Top Level Domain
-             (TLD) Registry".  This registry is defined in <xref
+             actions, PSOs will need to update the "DMARC Top Level Domain
+             (PSD) Registry".  This registry is defined in <xref
              target="iana1"/>.
          </t>
      </section>
      <section title="Section 6.6.3.  Policy Discovery">
          <t>A new step between step 3 and 4 is added:</t>
          <t><list style="hanging">
-               <t hangText="3A.">If the set is now empty and the TLD of the
-                   Organizational Domain is listed in the DMARC TLD Registry,
+               <t hangText="3A.">If the set is now empty and the PSD of the
+                   Organizational Domain is listed in the DMARC PSD Registry,
                    the Mail Receiver MUST query the DNS for a DMARC TXT record
                    at the DNS domain matching the Organizational Domain with one
                    label removed in place of the RFC5322.From domain in the
@@ -154,13 +154,13 @@
                </t>
          </list> </t>
          <t>As an example, for a message with the Organizational Domain of
-             "example.compute.amazonaws.com.cn", the query for TLD DMARC would
+             "example.compute.amazonaws.com.cn", the query for PSD DMARC would
              use "_dmarc.compute.amazonaws.com.cn".
          </t>
      </section>
      <section title="Section 7.  DMARC Feedback">
-         <t>Operational note for TLD DMARC: For TLDOs, feedback for non-existent
-             domains is desired and useful.  Because of the constraints on TLD
+         <t>Operational note for PSD DMARC: For PSOs, feedback for non-existent
+             domains is desired and useful.  Because of the constraints on PSD
              DMARC scope, there are not significant privacy considerations
              associated with this reporting (See <xref target="privacy"/>).
          </t>
@@ -172,44 +172,44 @@
           Considerations of <xref target="RFC7489"/>.
       </t>
       <section title="Feedback leakage">
-          <t>Providing feedback reporting to TLDOs can, in some cases, create
-              leakage of information outside of an organization to the TLDO.
+          <t>Providing feedback reporting to PSOs can, in some cases, create
+              leakage of information outside of an organization to the PSO.
               There are roughly three cases to consider:
           </t>
           <t><list style="symbols">
-                  <t>Branded TLDs (e.g., ".google"), RUA and RUF reports based
-                      on TLD DMARC have the potential to contain information
+                  <t>Branded PSDs (e.g., ".google"), RUA and RUF reports based
+                      on PSD DMARC have the potential to contain information
                       about emails related to entities managed by the
-                      organization.  Since both the TLDO and the
+                      organization.  Since both the PSO and the
                       Organizational Domain owners are common, there is no
                       privacy risk for either normal or Non-existent Domain
                       reporting.
                   </t>
-                  <t>Multi-organization TLDs that require DMARC usage (e.g.,
-                      ".bank"):  TLD DMARC based reports will only be generated
+                  <t>Multi-organization PSDs that require DMARC usage (e.g.,
+                      ".bank"):  PSD DMARC based reports will only be generated
                       for domains that do not publish a DMARC policy at the
                       organizational level.  For domains that do publish the
                       required DMARC policy records, the feedback reporting
                       addresses (RUA and RUF) of the organization will be used.
-                      Since TLD DMARC is limited to TLDs that mandate
+                      Since PSD DMARC is limited to PSDs that mandate
                       organizational domains publish DMARC policy for existing
                       domains, the risk of this issue is limited to 
-                      organizational domains that are out of compliance with TLD
+                      organizational domains that are out of compliance with PSD
                       policy.
                   </t>
-                  <t>Multi-organization TLDs (e.g., ".com") that do not mandate
+                  <t>Multi-organization PSDs (e.g., ".com") that do not mandate
                       DMARC usage.  Privacy risks for organizational domains
-                      within such TLDs would be significant.  This is mitigated
-                      by the limitation to only include TLDs listed in the
-                      public IANA DMARC TLD Registry described in <xref
+                      within such PSDs would be significant.  This is mitigated
+                      by the limitation to only include PSDs listed in the
+                      public IANA DMARC PSD Registry described in <xref
                       target="iana1"/>.
                   </t>
           </list></t>
-          <t>TLDOs will receive feedback on non-existent domains, which may be
+          <t>PSOs will receive feedback on non-existent domains, which may be
               similar to existing organizational domains.  Feedback related to
               such cousin domains have a small risk of carrying information
               related to an actual organizational domain.  To minimize this
-              potential concern, TLD DMARC feedback is best limited to
+              potential concern, PSD DMARC feedback is best limited to
               Aggregate Reports.  Feedback Reports carry more detailed
               information and present a greater risk.
           </t>
@@ -224,24 +224,24 @@
    <section anchor="iana" title="IANA Considerations">
        <t>This section describes actions requested to be completed by IANA.</t>
 
-       <section anchor="iana1" title="DMARC Top Level Domain (TLD) Registry">
-           <t>IANA is requested to create a new DMARC Top Level Domain (TLD)
-               Registry within the Domain-based Message Authentication,
-               Reporting, and Conformance (DMARC) Parameters Registry.
+       <section anchor="iana1" title="DMARC Public Suffix Registry">
+           <t>IANA is requested to create a new DMARC Public Suffix Registry
+               within the Domain-based Message Authentication, Reporting, and
+               Conformance (DMARC) Parameters Registry.
            </t>
-           <t>Names of TLDs participating in TLD DMARC must be registered with
+           <t>Names of PSDs participating in PSD DMARC must be registered with
                IANA in this new sub-registry.  New entries are assigned only for
-               TLDs that require use of DMARC.  The requirement has to be
+               PSDs that require use of DMARC.  The requirement has to be
                documented in a manner that satisfies the terms of Expert Review,
                per <xref target="RFC5226"/>.  The Designated Expert needs to
-               confirm that provided documentation adequately describes TLD
+               confirm that provided documentation adequately describes PSD
                policy to require domain owners to use DMARC or that all domain
-               owners are part of a single organization with the TLDO.
+               owners are part of a single organization with the PSO.
            </t>
            <t>The initial set of entries in this registry is as follows:
             <figure><artwork>
 +-------------+----------------+---------------+
-|    TLD      | Reference      | Status        |
+|    PSD      | Reference      | Status        |
 +-------------+----------------+---------------+
 | .bank       | this document  | current       |
 +-------------+----------------+---------------+
