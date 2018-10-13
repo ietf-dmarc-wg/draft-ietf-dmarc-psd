@@ -10,13 +10,13 @@
 <?rfc subcompact="no"?>
 
 <rfc category="info"
-     docName="draft-kitterman-dmarc-tld-00"
+     docName="draft-kitterman-dmarc-psd-00"
      ipr="trust200902"
      updates="7489">
 
  <front>
-   <title abbrev="TLD DMARC">DMARC (Domain-based Message Authentication, 
-       Reporting, and Conformance) Extension For TLDs (Top Level Domains)
+   <title abbrev="PSD DMARC">DMARC (Domain-based Message Authentication, 
+       Reporting, and Conformance) Extension For PSDs (Public Suffix Domains)
    </title>
 
    <author initials="S." surname="Kitterman"
