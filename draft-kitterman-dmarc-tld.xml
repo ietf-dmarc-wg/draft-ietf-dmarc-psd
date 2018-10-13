@@ -205,7 +205,7 @@
                       target="iana1"/>.
                   </t>
           </list></t>
-          <t>TLDOs will receive feedback on non-existant domains, which may be
+          <t>TLDOs will receive feedback on non-existent domains, which may be
               similar to existing organizational domains.  Feedback related to
               such cousin domains have a small risk of carrying information
               related to an actual organizational domain.  To minimize this
