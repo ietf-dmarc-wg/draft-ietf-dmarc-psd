@@ -48,27 +48,88 @@
          is a scalable mechanism by which a mail-originating organization can
          express domain-level policies and preferences for message validation,
          disposition, and reporting, that a mail-receiving organization can use
-         to improve mail handling.  DMARC itself does not apply to domains above
-         the organizational level, such as PSDs (Public Suffix Domains).  For
-         the subset of PSDs (or other non-organizational domains) that require
-         DMARC usage, it is appropriate to provide PSD level DMARC capability.
-         This memo describes an extension to DMARC to enable a subset of DMARC
-         functionality for such domains.</t>
+         to improve mail handling.  DMARC policies can be applied at the
+         individual domain level or for a set of domains at the organizational
+         level.  The design of DMARC precludes grouping policies for a set of
+         domains above the organizational level, such as TLDs (Top Level
+         Domains).  These types of domains (which are not all at the top level
+         of the DNS tree) can be collectively referred to as Public Suffix
+         Domains (PSDs).  For the subset of PSDs that require DMARC usage, it is
+         appropriate to provide PSD level DMARC capability to provide policy and
+         collect feedback for a set of domains.  This memo describes an
+         extension to DMARC to enable a subset of DMARC functionality for such
+         domains.</t>
    </abstract>
  </front>
 
  <middle>
    <section anchor="intro" title="Introduction">
      <t><xref target="RFC7489">DMARC</xref> provides email sending
-         organizational policy information to email receivers.  Due to the
-         design of <xref target="RFC7489">DMARC</xref> and the nature of the
-         Internet <xref target="RFC5598">email architecture</xref>, there are
-         interoperability issues associated with <xref target="RFC7489">
+         organizational policy information to email receivers.  <xref
+         target="RFC7489">DMARC</xref> allows policy to be specified for both
+         individual domains and sets of domains within a single organization.
+         For domains above the organizational level in the DNS tree, they are
+         currently limited to expressing policy for the exact domain.  There is
+         no method available to such domains to express lower level policy or
+         receive feedback reporting for sets of domains.  This prevents policy
+         declarations for non-existent domains and identification of domain
+         abuse in email, which can be important for brand and consumer
+         protection.
+     </t>
+     <t>As an example, imagine a country code TLD (ccTLD) which has subdomains
+         for government and commercial use (.gov.example and .com.example).
+         Within the .gov.example public suffix, use of <xref target="RFC7489">
+         DMARC</xref> has been mandated and .gov.example has published its own
+         <xref target="RFC7489">DMARC</xref> record:
+         <figure><artwork>
+"v=DMARC1;p=reject;rua=mailto:dmarc@dmarc.service.gov.example"
+        </artwork></figure>
+         at
+         <figure><artwork>
+_dmarc.gov.example.
+         </artwork></figure>
+         This would provide policy and feedback for mail sent from @gov.example,
+         but not @tax.gov.example and there is no way to publish an
+         organizational level policy that would do so.  While, in theory,
+         receivers could reject mail from non-existent domains, in practice
+         there are operational issues with doing so that make it impractical.
+         Non-existence of the sending domain is often a factor in a mail
+         delivery decision, but not generally treated as definitive on its own.
+     </t>
+     <t>This memo provides a simple extension to <xref target="RFC7489">DMARC
+         </xref> to allow operators of Public Suffix Domains (PSDs) to express
+         policy for groups of subdomains, extends the <xref target="RFC7489">
+         DMARC</xref> policy query functionality to detect and process such a
+         policy, describes receiver feedback for such policies, and provides
+         controls to mitigate potential privacy considerations associated with
+         this extension.
+     </t>
+     <t>There are two types of Public Suffix Operators (PSOs) for which this
+         extension would be useful and appropriate:
+     </t>
+         <t><list style="symbols">
+                  <t>Branded PSDs (e.g., ".google"): These domains are
+                      effectively organizational domains as discussed in <xref
+                      target="RFC7489">DMARC</xref>.  They control all
+                      subdomains of the tree.  The ".gov.example" used above is
+                      an example of this class.
+                  </t>
+                  <t>Multi-organization PSDs that require DMARC usage (e.g.,
+                      ".bank"):  Because existing organizational domains using
+                      this PSD have their own DMARC policy, the applicability of
+                      this extension is for non-existent domains.  The extension
+                      allows the brand protection benefits of <xref
+                      target="RFC7489">DMARC</xref> to extend to the entire PSD,
+                      including cousin domains of registere organizations.
+                  </t>
+          </list></t>
+     <t>Due to the design of <xref target="RFC7489">DMARC</xref> and the nature
+         of the Internet <xref target="RFC5598">email architecture</xref>, there
+         are interoperability issues associated with <xref target="RFC7489">
          DMARC</xref> deployment.  These are discussed in <xref target="RFC7960">
          Interoperability Issues between DMARC and Indirect Email Flows</xref>.
          These issues are not applicable to PSDs, since they do not send mail.
      </t>
-
      <t><xref target="RFC7489">DMARC</xref>, by design, does not support
          requirements of PSD operators.  For PSDs that require use of
          <xref target="RFC7489">DMARC</xref>, a subset of DMARC reporting and
