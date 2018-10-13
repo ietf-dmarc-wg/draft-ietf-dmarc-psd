@@ -155,13 +155,19 @@ _dmarc.gov.example.
            <t>The global Internet Domain Name System (DNS) is documented in
                numerous Requests for Comment (RFC).  It defines a tree of names
                starting with root, ".", immediately below which are Top Level
-               Domain names such as ".com" and ".us".  The usage for PSD DMARC
-               is broader and includes all domains above the organizational
-               level in the tree, e.g., ".gov.uk".
+               Domain names such as ".com" and ".us".  They are not available
+               for private registration.  In many cases the public portion of
+               the DNS tree is more than one level deep.  PSD DMARC includes all
+               public domains above the organizational level in the tree, e.g.,
+               ".gov.uk".
+           </t>
+       </section>
+       <section anchor="lpsd" title="Longest PSD">
+           <t>Organizational Domain with one label removed.
            </t>
        </section>
        <section title="Public Suffix Operator (PSO)">
-           <t>A PS Operator manages operations within their PSD.
+           <t>A Public Suffix Operator manages operations within their PSD.
            </t>
        </section>
        <section title="PSO Controlled Domain Names">
@@ -197,7 +203,7 @@ _dmarc.gov.example.
      </section>
      <section title="Section 6.5.  Domain Owner Actions">
          <t>In addition to the <xref target="RFC7489">DMARC</xref> domain owner
-             actions, PSOs will need to update the "DMARC Top Level Domain
+             actions, PSOs will need to update the "DMARC Public Suffix Domain
              (PSD) Registry".  This registry is defined in <xref
              target="iana1"/>.
          </t>
@@ -205,18 +211,29 @@ _dmarc.gov.example.
      <section title="Section 6.6.3.  Policy Discovery">
          <t>A new step between step 3 and 4 is added:</t>
          <t><list style="hanging">
-               <t hangText="3A.">If the set is now empty and the PSD of the
-                   Organizational Domain is listed in the DMARC PSD Registry,
-                   the Mail Receiver MUST query the DNS for a DMARC TXT record
-                   at the DNS domain matching the Organizational Domain with one
-                   label removed in place of the RFC5322.From domain in the
-                   message (if different).  A possibly empty set of records is
-                   returned.
+               <t hangText="3A.">If the set is now empty and the <xref
+                   target="lpsd">longest PSD</xref> of the  Organizational
+                   Domain is listed in the DMARC PSD Registry (defined in <xref
+                   target="iana1"/>), the Mail Receiver MUST query the DNS for a
+                   DMARC TXT record at the DNS domain matching the <xref
+                   target="lpsd">longest PSD</xref> in place of the RFC5322.From
+                   domain in the message (if different).  A possibly empty set
+                   of records is returned.
                </t>
          </list> </t>
          <t>As an example, for a message with the Organizational Domain of
-             "example.compute.amazonaws.com.cn", the query for PSD DMARC would
-             use "_dmarc.compute.amazonaws.com.cn".
+             "example.compute.cloudcompany.com.cctld", the query for PSD DMARC
+             would use "compute.cloudcompany.com.cctld" as the <xref
+             target="lpsd">longest PSD</xref>.  The receiver would check to see
+             if that PSD is listed in the DMARC PSD Registry, and if so, perform
+             the policy lookup at "_dmarc.compute.cloudcompany.com.cctld".
+         </t>
+         <t>Note: Because the PSD policy query comes after the Organizational
+             Domain policy query, PSD policy is not used for Organizational
+             domains that have published a <xref target="RFC7489">DMARC</xref>
+             policy.  Specifically, this is not a mechanism to provide
+             feedback addresses (RUA/RUF) when an Organizational Domain has
+             declined to do so.
          </t>
      </section>
      <section title="Section 7.  DMARC Feedback">
@@ -285,10 +302,11 @@ _dmarc.gov.example.
    <section anchor="iana" title="IANA Considerations">
        <t>This section describes actions requested to be completed by IANA.</t>
 
-       <section anchor="iana1" title="DMARC Public Suffix Registry">
-           <t>IANA is requested to create a new DMARC Public Suffix Registry
-               within the Domain-based Message Authentication, Reporting, and
-               Conformance (DMARC) Parameters Registry.
+       <section anchor="iana1" title="DMARC Public Suffix Domain (PSD)
+                Registry">
+           <t>IANA is requested to create a new DMARC Public Suffix Domain (PSD)
+               Registry within the Domain-based Message Authentication,
+               Reporting, and Conformance (DMARC) Parameters Registry.
            </t>
            <t>Names of PSDs participating in PSD DMARC must be registered with
                IANA in this new sub-registry.  New entries are assigned only for
