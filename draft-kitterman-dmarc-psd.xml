@@ -330,6 +330,8 @@ _dmarc.gov.example.
 +-------------+----------------+---------------+
 | .insurance  | this document  | current       |
 +-------------+----------------+---------------+
+| .gov.uk     | this document  | current       |
++-------------+----------------+---------------+
                                 </artwork> </figure>
            </t>
        </section>
