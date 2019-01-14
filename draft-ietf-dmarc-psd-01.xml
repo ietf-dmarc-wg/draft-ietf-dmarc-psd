@@ -37,7 +37,7 @@
       </address>
    </author>
 
-   <date month="December" year="2018" />
+   <date month="January" year="2019" />
 
    <keyword>DMARC</keyword>
    <keyword>email authentication</keyword>
@@ -133,10 +133,10 @@ _dmarc.gov.example.
          ".gov.example" used above) do not send mail.
      </t>
      <t><xref target="RFC7489">DMARC</xref>, by design, does not support
-         usage by PSD operators.  For PSDs that require use of
-         <xref target="RFC7489">DMARC</xref>, an extension of DMARC reporting
-         and enforcement capability is needed for PSD operators to effectively
-         manage and monitor implementation of PSD requirements.
+         usage by PSOs.  For PSDs that require use of <xref
+	 target="RFC7489">DMARC</xref>, an extension of DMARC reporting and
+	 enforcement capability is needed for PSO to effectively manage and
+	 monitor implementation of PSD requirements.
      </t>
 
    </section>
@@ -207,9 +207,8 @@ _dmarc.gov.example.
      </section>
      <section title="Section 6.5.  Domain Owner Actions">
          <t>In addition to the <xref target="RFC7489">DMARC</xref> domain owner
-             actions, PSOs will need to update the "DMARC Public Suffix Domain
-             (PSD) Registry".  This registry is defined in <xref
-             target="iana1"/>.
+             actions, PSOs that require use of DMARC ought to make that
+	     information available to receivers.
          </t>
      </section>
      <section title="Section 6.6.3.  Policy Discovery">
@@ -217,8 +216,8 @@ _dmarc.gov.example.
          <t><list style="hanging">
                <t hangText="3A.">If the set is now empty and the <xref
                    target="lpsd">longest PSD</xref> of the  Organizational
-                   Domain is listed in the DMARC PSD Registry (defined in <xref
-                   target="iana1"/>), the Mail Receiver MUST query the DNS for a
+                   Domain is one that the receiver has determined is acceptable
+		   for PSD DMARC, the Mail Receiver MUST query the DNS for a
                    DMARC TXT record at the DNS domain matching the <xref
                    target="lpsd">longest PSD</xref> in place of the RFC5322.From
                    domain in the message (if different).  A possibly empty set
@@ -242,30 +241,32 @@ _dmarc.gov.example.
      </section>
      <section title="Section 7.  DMARC Feedback">
          <t>Operational note for PSD DMARC: For PSOs, feedback for non-existent
-             domains is desired and useful.  Because of the constraints on PSD
-             DMARC scope, there are no significant privacy considerations
-             associated with this reporting (See <xref target="privacy"/>).
+             domains is desired and useful.  See <xref target="privacy"/> for
+	     discussion of Privacy Considerations.
          </t>
      </section>
    </section>
 
    <section anchor="privacy" title="Privacy Considerations">
-      <t>This document does not significantly change the Privacy
-          Considerations of <xref target="RFC7489"/>.
+      <t>These privacy considerations are developed based on the requiremetns of
+          <xref target="RFC6973"/>.  The Privacy Considerations of <xref
+          target="RFC7489"/> apply to this document.
       </t>
       <section title="Feedback leakage">
           <t>Providing feedback reporting to PSOs can, in some cases, create
               leakage of information outside of an organization to the PSO.
-              There are roughly three cases to consider:
+	      This leakage could be potentially be utilized as part of a program
+	      of pervasive surveillance (See <xref target="RFC7624"/>).  There
+	      are roughly three cases to consider:
           </t>
           <t><list style="symbols">
-                  <t>Branded PSDs (e.g., ".google"), RUA and RUF reports based
-                      on PSD DMARC have the potential to contain information
-                      about emails related to entities managed by the
-                      organization.  Since both the PSO and the
+                  <t>Single Organization PSDs (e.g., ".google"), RUA and RUF
+		      reports based on PSD DMARC have the potential to contain
+		      information about emails related to entities managed by
+		      the organization.  Since both the PSO and the
                       Organizational Domain owners are common, there is no
-                      privacy risk for either normal or non-existent Domain
-                      reporting.
+                      additional privacy risk for either normal or non-existent
+		      Domain reporting due to PSD DMARC.
                   </t>
                   <t>Multi-organization PSDs that require DMARC usage (e.g.,
                       ".bank"):  PSD DMARC based reports will only be generated
@@ -273,18 +274,19 @@ _dmarc.gov.example.
                       organizational or host level.  For domains that do publish
                       the required DMARC policy records, the feedback reporting
                       addresses (RUA and RUF) of the organization (or hosts)
-                      will be used.  Since PSD DMARC is limited to PSDs that
-                      mandate Organizational Domains publish DMARC policy for
-                      existing domains, the risk of this issue is limited to 
-                      Organizational Domains that are out of compliance with PSD
-                      policy.
+                      will be used.  The only direct feedback leakage risk for
+		      these PSDs are for Organizational Domains that are out of
+		      compliance with PSD policy.  Data on non-existent cousin
+		      domains would be sent to the PSO.
                   </t>
                   <t>Multi-organization PSDs (e.g., ".com") that do not mandate
                       DMARC usage.  Privacy risks for Organizational Domains
-                      within such PSDs would be significant.  This is mitigated
-                      by the limitation to only include PSDs listed in the
-                      public IANA DMARC PSD Registry described in <xref
-                      target="iana1"/>.
+                      that have not deployed DMARC within such PSDs are
+		      significant.  For non-DMARC Organizational Domains, all
+		      DMARC feedback will be directed to the PSO.  PSD DMARC is
+		      opt-out (by publishing a DMARC record at the
+		      Organizational Domain level) vice opt-in, which would be
+		      the more desirable characteristic.
                   </t>
           </list></t>
           <t>PSOs will receive feedback on non-existent domains, which may be
@@ -295,46 +297,30 @@ _dmarc.gov.example.
               Aggregate Reports.  Feedback Reports carry more detailed
               information and present a greater risk.
           </t>
+	  <t>Due to the inherent Privacy and Security risks associated with
+	      PSD DMARC for Organizational Domains in multi-organization PSDs
+	      that do not particpate in DMARC, any Feedback Reporting related to
+	      multi-organizational PSDs ought to be limited to non-existent
+	      domains except in cases where the reporter knows that PSO
+	      requires use of DMARC.
+	  </t>
       </section>
    </section>
 
    <section title="Security Considerations">
       <t> This document does not change the Security Considerations of
-      <xref target="RFC7489"/>.</t>
+          <xref target="RFC7489"/> and <xref target="RFC7960"/>.
+      </t>
+      <t> The risks of the issues identified in <xref target="RFC7489"/>,
+	  Section 12.5, External Reporting Addresses, are amplified by PSD
+	  DMARC.  By design, PSD DMARC causes unrequested reporting of feedback
+	  to entities external to the Organizational Domain.  This is discussed
+	  in more detail in <xref target="privacy"/>.
+      </t>
    </section>
 
    <section anchor="iana" title="IANA Considerations">
-       <t>This section describes actions requested to be completed by IANA.</t>
-
-       <section anchor="iana1" title="DMARC Public Suffix Domain (PSD)
-                Registry">
-           <t>IANA is requested to create a new DMARC Public Suffix Domain (PSD)
-               Registry within the Domain-based Message Authentication,
-               Reporting, and Conformance (DMARC) Parameters Registry.
-           </t>
-           <t>Names of PSDs participating in PSD DMARC must be registered with
-               IANA in this new sub-registry.  New entries are assigned only for
-               PSDs that require use of DMARC.  The requirement has to be
-               documented in a manner that satisfies the terms of Expert Review,
-               per <xref target="RFC5226"/>.  The Designated Expert needs to
-               confirm that provided documentation adequately describes PSD
-               policy to require domain owners to use DMARC or that all domain
-               owners are part of a single organization with the PSO.
-           </t>
-           <t>The initial set of entries in this registry is as follows:
-            <figure><artwork>
-+-------------+----------------+---------------+
-|    PSD      | Reference      | Status        |
-+-------------+----------------+---------------+
-| .bank       | this document  | current       |
-+-------------+----------------+---------------+
-| .insurance  | this document  | current       |
-+-------------+----------------+---------------+
-| .gov.uk     | this document  | current       |
-+-------------+----------------+---------------+
-                                </artwork> </figure>
-           </t>
-       </section>
+       <t>This document does not require any IANA actions.</t>
    </section>
  </middle>
 
@@ -346,8 +332,9 @@ _dmarc.gov.example.
    </references>
 
    <references title="Informative References">
-      <?rfc include="reference.RFC.5226" ?>
       <?rfc include="reference.RFC.5598" ?>
+      <?rfc include="reference.RFC.6973" ?>
+      <?rfc include="reference.RFC.7624" ?>
       <?rfc include="reference.RFC.7960" ?>
       <?rfc include="reference.RFC.8020" ?>
 
