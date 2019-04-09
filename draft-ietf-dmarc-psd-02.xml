@@ -9,11 +9,7 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
-<<<<<<< HEAD
 <rfc category="exp"
-=======
-<rfc category="experimental"
->>>>>>> b80d587fcd1e4a2321f44b93740c5e2cd5f9cd78
      docName="draft-ietf-dmarc-psd-02"
      ipr="trust200902">
 
@@ -342,6 +338,13 @@ _dmarc.gov.example.
       <?rfc include="reference.RFC.8020" ?>
 
    </references>
+
+   <section anchor="experiment" title="The Experiment">
+      <t> TBS </t>
+    </section>
+   <section anchor="registry" title="DMARC PSD Registry Example">
+      <t> TBS </t>
+    </section>
    <section anchor="thanks" title="Acknowledgements" numbered="no">
       <t> TBS </t>
     </section>
