@@ -251,7 +251,7 @@ _dmarc.gov.example.
           <xref target="RFC6973"/>.  The Privacy Considerations of <xref
           target="RFC7489"/> apply to this document.
       </t>
-      <section title="Feedback leakage">
+      <section anchor="leakage" title="Feedback leakage">
           <t>Providing feedback reporting to PSOs can, in some cases, create
               leakage of information outside of an organization to the PSO.
 	      This leakage could be potentially be utilized as part of a program
@@ -336,11 +336,60 @@ _dmarc.gov.example.
       <?rfc include="reference.RFC.7624" ?>
       <?rfc include="reference.RFC.7960" ?>
       <?rfc include="reference.RFC.8020" ?>
+      <reference anchor="PSL" target="https://publicsuffix.org/">
+         <front>
+            <title>Public Suffix List</title>
+            <author>
+               <organization>multiple</organization>
+            </author>
+            <date month="April" year="2019" />
+         </front>
+      </reference>
 
    </references>
 
    <section anchor="experiment" title="The Experiment">
-      <t> TBS </t>
+      <t> To mitigate the privacy concerns associated with Multi-organization
+	  PSDs that do not mandate DMARC usage, see <xref target="leakage"/>,
+	  a mechanism to indicate which PSDs do not present this privacy risk is
+	  appropriate.  There are multiple approaches that are possible.
+      </t>
+      <t> The experiment is to evaluate different possible approaches.  The
+	  experiment will be complete when there is rough consensus on a
+	  technical approach that is demonstrated to be operationally usable and
+	  effective at mitigating the privacy concern.
+      </t>
+      <t> The mechanism needs the following attributes: </t>
+	  <t><list style="symbols">
+		  <t> Be reliably, publicly accessible</t>
+		  <t> Be under configuration control based on a public set of
+		      criteria
+		  </t>
+		  <t> List PSDs that either mandate DMARC for their registrants
+		      or for which all lower level domains are controlled by the
+		      PSDo and that the relevant PSDo has indicated a desire for
+		      the PSD to participate in PSD DMARC
+		  </t>
+		  <t> Have a small operational footprint (e.g. provide a
+		      documented, lightweight mechanism for developers and
+		      operators to retrieve the list of PSD DMARC participants)
+		  </t>
+		  <t> Not allow PSDos to add PSDs to the PSD DMARC participants
+		      list without third party review
+		  </t>
+	  </list></t>
+      <t> As of this writing, three approaches have been proposed.  None of them
+	  are ideal:
+      </t>
+	  <t><list style="symbols">
+		  <t> An IANA registry</t>
+		  <t> An extension to the Public Suffix List at <xref
+		      target="PSL"/>
+		  </t>
+		  <t> A dedicated registry queried via DNS - an example of such
+		      a service is described in <xref target="registry"/> below
+		  </t>
+	  </list></t>
     </section>
    <section anchor="registry" title="DMARC PSD Registry Example">
       <t> TBS </t>
