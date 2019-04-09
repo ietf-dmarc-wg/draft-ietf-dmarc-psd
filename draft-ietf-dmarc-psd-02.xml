@@ -331,6 +331,7 @@ _dmarc.gov.example.
    </references>
 
    <references title="Informative References">
+      <?rfc include="reference.RFC.5226" ?>
       <?rfc include="reference.RFC.5598" ?>
       <?rfc include="reference.RFC.6973" ?>
       <?rfc include="reference.RFC.7624" ?>
@@ -339,6 +340,15 @@ _dmarc.gov.example.
       <reference anchor="PSL" target="https://publicsuffix.org/">
          <front>
             <title>Public Suffix List</title>
+            <author>
+               <organization>multiple</organization>
+            </author>
+            <date month="April" year="2019" />
+         </front>
+      </reference>
+      <reference anchor="psddmarc.org" target="https://psddmarc.org/">
+         <front>
+            <title>PSD DMARC Web Site</title>
             <author>
                <organization>multiple</organization>
             </author>
@@ -392,7 +402,40 @@ _dmarc.gov.example.
 	  </list></t>
     </section>
    <section anchor="registry" title="DMARC PSD Registry Example">
-      <t> TBS </t>
+      <t> To faciliate experimentation around data leakage mitigation, a sample
+	  service is available at <xref target="psddmarc.org"/>.  It was
+	  developed based on the requirements suggested for an IANA registry in
+	  an earlier revision of this draft.  Usage of the service is described
+	  on the web site.
+      </t>
+       <section anchor="iana1" title="DMARC Public Suffix Domain (PSD)
+                Registry">
+           <t><xref target="psddmarc.org"/> provides a DMARC Public Suffix
+	       Domain (PSD) Registry as a stand-alone DNS query service.
+           </t>
+           <t>Names of PSDs participating in PSD DMARC must be registered this
+	       new registry.  New entries are assigned only for PSDs that
+	       require use of DMARC.  The requirement has to be documented in a
+	       manner that satisfies the terms of Expert Review,per <xref
+	       target="RFC5226"/>.  The Designated Expert needs to confirm that
+	       provided documentation adequately describes PSD policy to require
+	       domain owners to use DMARC or that all domain owners are part of
+	       a single organization with the PSO.
+           </t>
+           <t>The initial set of entries in this registry is as follows:
+            <figure><artwork>
++-------------+---------------+
+|    PSD      | Status        |
++-------------+---------------+
+| .bank       | current       |
++-------------+---------------+
+| .insurance  | current       |
++-------------+---------------+
+| .gov.uk     | current       |
++-------------+---------------+
+                                </artwork> </figure>
+           </t>
+       </section>
     </section>
    <section anchor="thanks" title="Acknowledgements" numbered="no">
       <t> TBS </t>
