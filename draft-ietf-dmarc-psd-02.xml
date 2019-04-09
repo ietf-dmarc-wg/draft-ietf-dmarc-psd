@@ -279,13 +279,17 @@ _dmarc.gov.example.
 		      domains would be sent to the PSO.
                   </t>
                   <t>Multi-organization PSDs (e.g., ".com") that do not mandate
-                      DMARC usage.  Privacy risks for Organizational Domains
+                      DMARC usage:  Privacy risks for Organizational Domains
                       that have not deployed DMARC within such PSDs are
 		      significant.  For non-DMARC Organizational Domains, all
 		      DMARC feedback will be directed to the PSO.  PSD DMARC is
 		      opt-out (by publishing a DMARC record at the
 		      Organizational Domain level) vice opt-in, which would be
-		      the more desirable characteristic.
+		      the more desirable characteristic.  This means that any
+		      non-DMARC organizational domain would have it's feedback
+		      reports redirected to the PSDo.  The content of such
+		      reports, particularly for existing domains, is privacy
+		      sensitive.
                   </t>
           </list></t>
           <t>PSOs will receive feedback on non-existent domains, which may be
@@ -408,8 +412,7 @@ _dmarc.gov.example.
 	  an earlier revision of this draft.  Usage of the service is described
 	  on the web site.
       </t>
-       <section anchor="iana1" title="DMARC Public Suffix Domain (PSD)
-                Registry">
+       <section anchor="iana1" title="DMARC Public Suffix Domain (PSD) Registry">
            <t><xref target="psddmarc.org"/> provides a DMARC Public Suffix
 	       Domain (PSD) Registry as a stand-alone DNS query service.
            </t>
