@@ -9,7 +9,11 @@
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
 
+<<<<<<< HEAD
 <rfc category="exp"
+=======
+<rfc category="experimental"
+>>>>>>> b80d587fcd1e4a2321f44b93740c5e2cd5f9cd78
      docName="draft-ietf-dmarc-psd-02"
      ipr="trust200902">
 
