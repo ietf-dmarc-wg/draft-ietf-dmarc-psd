@@ -438,7 +438,12 @@ _dmarc.gov.example.
        </section>
     </section>
    <section anchor="thanks" title="Acknowledgements" numbered="no">
-      <t> TBS </t>
+      <t> Thanks to the following individuals for their contributions (both
+	  public and private) to improving this document.  Special shout out to
+	  Dave Crocker for naming the beast.</t>
+      <t> Kurt Andersen, Seth Blank, Dave Crocker, Heather Diaz, Tim Draegen,
+	  Zeke Hendrickson, Andrew Kennedy, John Levine, Dr Ian Levy, Craig
+	  Schwartz, Alessandro Vesely, and Tim Wicinski</t>
     </section>
  </back>
 </rfc>
