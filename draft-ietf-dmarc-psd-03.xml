@@ -287,7 +287,7 @@ _dmarc.gov.example.
 		      Organizational Domain level) vice opt-in, which would be
 		      the more desirable characteristic.  This means that any
 		      non-DMARC organizational domain would have it's feedback
-		      reports redirected to the PSDo.  The content of such
+		      reports redirected to the PSO.  The content of such
 		      reports, particularly for existing domains, is privacy
 		      sensitive.
                   </t>
@@ -381,14 +381,14 @@ _dmarc.gov.example.
 		  </t>
 		  <t> List PSDs that either mandate DMARC for their registrants
 		      or for which all lower level domains are controlled by the
-		      PSDo and that the relevant PSDo has indicated a desire for
+		      PSO and that the relevant PSO has indicated a desire for
 		      the PSD to participate in PSD DMARC
 		  </t>
 		  <t> Have a small operational footprint (e.g. provide a
 		      documented, lightweight mechanism for developers and
 		      operators to retrieve the list of PSD DMARC participants)
 		  </t>
-		  <t> Not allow PSDos to add PSDs to the PSD DMARC participants
+		  <t> Not allow PSO to add PSDs to the PSD DMARC participants
 		      list without third party review
 		  </t>
 	  </list></t>
