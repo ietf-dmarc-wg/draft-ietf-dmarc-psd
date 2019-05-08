@@ -100,6 +100,16 @@ _dmarc.gov.example.
          controls to mitigate potential privacy considerations associated with
          this extension.
      </t>
+     <t>As an additional benefit, the PSD DMARC extension will clarify
+	existing requirements.  Based on the requirements of <xref
+        target="RFC7489">DMARC</xref>, DMARC should function above the
+        organizational level for exact domain matches (i.e. if a DMARC record
+        were published for 'example', then mail from example@example should be
+        subject to DMARC processing.  Testing had revealed that this is not
+        consistently applied in different implementations.  PSD DMARC will
+        help clarify that DMARC is not limited to organizational domains and
+        their sub-domains.
+     </t>
      <t>There are two types of Public Suffix Operators (PSOs) for which this
          extension would be useful and appropriate:
      </t>
