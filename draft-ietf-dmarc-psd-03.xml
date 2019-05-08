@@ -240,8 +240,8 @@ _dmarc.gov.example.
      </section>
      <section title="Section 7.  DMARC Feedback">
          <t> <xref target="RFC7489"/> Section 7.3 Failure Reports MUST NOT be
-              sent for PSD DMARC.<t/>
-         <t>Operational note for PSD DMARC: For PSOs, feedback for non-existent
+	     sent for PSD DMARC.</t>
+         <t> Operational note for PSD DMARC: For PSOs, feedback for non-existent
              domains is desired and useful.  See <xref target="privacy"/> for
 	     discussion of Privacy Considerations.
          </t>
@@ -398,25 +398,33 @@ _dmarc.gov.example.
 	  are ideal:
       </t>
 	  <t><list style="symbols">
-		  <t> An IANA registry</t>
 		  <t> An extension to the Public Suffix List at <xref
 		      target="PSL"/>
 		  </t>
 		  <t> A dedicated registry queried via DNS - an example of such
-		      a service is described in <xref target="registry"/> below
+		      a service is described in <xref target="dnsregistry"/> below
 		  </t>
+		  <t> An IANA registry</t>
 	  </list></t>
     </section>
-   <section anchor="registry" title="DMARC PSD Registry Example">
-      <t> To faciliate experimentation around data leakage mitigation, a sample
-	  service is available at <xref target="psddmarc.org"/>.  It was
-	  developed based on the requirements suggested for an IANA registry in
-	  an earlier revision of this draft.  Usage of the service is described
-	  on the web site.
-      </t>
-       <section anchor="iana1" title="DMARC Public Suffix Domain (PSD) Registry">
-           <t><xref target="psddmarc.org"/> provides a DMARC Public Suffix
-	       Domain (PSD) Registry as a stand-alone DNS query service.
+   <section anchor="registry" title="DMARC PSD Registry Examples">
+	   <t> To faciliate experimentation around data leakage mitigation, samples
+	       of the DNS based and IANA like registries are available at
+	       <xref target="psddmarc.org"/>.
+           </t>
+	<section anchor="dnsregistry" title="DMARC PSD DNS Query Service">
+	   <t> A sample stand-alone DNS query service is available at <xref
+	       target="psddmarc.org"/>.  It was developed based on the contents
+	       suggested for an IANA registry in an earlier revision of this draft.
+	       Usage of the service is described on the web site.
+           </t>
+        </section>
+        <section anchor="iana1" title="DMARC Public Suffix Domain (PSD) Registry">
+	   <t> <xref target="psddmarc.org"/> provides an IANA like DMARC Public
+	       Suffix Domain (PSD) Registry as a stand-alone DNS query service.  It
+	       follows the contents and structure described below.  There is a Comma
+	       Separated Value (CSV) version of the listed PSD domains which is
+	       suitable for use in build updates for PSD DMARC capable software.
            </t>
            <t>Names of PSDs participating in PSD DMARC must be registered this
 	       new registry.  New entries are assigned only for PSDs that
