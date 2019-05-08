@@ -459,7 +459,20 @@ _dmarc.gov.example.
                                 </artwork> </figure>
            </t>
        </section>
-    </section>
+   </section>
+   <section anchor="implementation" title="Implementation">
+      <t> There is one known implementation of PSD DMARC available for testing.
+      </t>
+      <section title="Authheaders Module">
+	 <t>The authheaders Python module and command line tool is available
+	    for download or installation from Pypi (Python Packaging Index).
+         </t>
+	 <t>It supports both use of the DNS based query service and download
+	    of the CSV registry file from <xref target="psddmarc.org"/>.
+         </t>
+
+      </section>
+   </section>
    <section anchor="thanks" title="Acknowledgements" numbered="no">
       <t> Thanks to the following individuals for their contributions (both
 	  public and private) to improving this document.  Special shout out to
