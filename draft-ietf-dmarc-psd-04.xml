@@ -10,7 +10,7 @@
 <?rfc subcompact="no"?>
 
 <rfc category="exp"
-     docName="draft-ietf-dmarc-psd-03"
+     docName="draft-ietf-dmarc-psd-04"
      ipr="trust200902">
 
  <front>
@@ -105,7 +105,7 @@ _dmarc.gov.example.
         target="RFC7489">DMARC</xref>, DMARC should function above the
         organizational level for exact domain matches (i.e. if a DMARC record
         were published for 'example', then mail from example@example should be
-        subject to DMARC processing.  Testing had revealed that this is not
+        subject to DMARC processing).  Testing had revealed that this is not
         consistently applied in different implementations.  PSD DMARC will
         help clarify that DMARC is not limited to organizational domains and
         their sub-domains.
