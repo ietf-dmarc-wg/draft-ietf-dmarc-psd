@@ -296,7 +296,7 @@ _dmarc.gov.example.
 		      opt-out (by publishing a DMARC record at the
 		      Organizational Domain level) vice opt-in, which would be
 		      the more desirable characteristic.  This means that any
-		      non-DMARC organizational domain would have it's feedback
+		      non-DMARC organizational domain would have its feedback
 		      reports redirected to the PSO.  The content of such
 		      reports, particularly for existing domains, is privacy
 		      sensitive.
