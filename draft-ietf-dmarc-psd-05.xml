@@ -100,6 +100,15 @@ _dmarc.gov.example.
          controls to mitigate potential privacy considerations associated with
          this extension.
      </t>
+     <t>This memo also provides a new <xref target="RFC7489">DMARC</xref> tag
+	to indicate requested handling policy for non-existent subdommains.
+	This is provided specifically to support phased deployment of PSD
+	DMARC, but is expected to be useful more generally.  Undesired
+	rejection risks for mail purporting to be from domains that do not
+	exist are substantially lower than for those that do, so the
+	operational risk of requesting harsh policy treatment (e.g. reject) is
+	lower.
+     </t>
      <t>As an additional benefit, the PSD DMARC extension will clarify
 	existing requirements.  Based on the requirements of <xref
         target="RFC7489">DMARC</xref>, DMARC should function above the
@@ -193,10 +202,9 @@ _dmarc.gov.example.
        </section>
        <section title="Non-existent Domains">
            <t>For <xref target="RFC7489">DMARC</xref> purposes, a non-existent
-               domain is a domain name that publishes none of A, AAAA, or MX
-               records that the receiver is willing to accept.  This is a
-               broader definition than that in <xref
-               target="RFC8020">NXDOMAIN</xref>.
+	      domain is a domain for which there is an NXDOMAIN or NODATA
+	      response for A, AAAA, and MX records.  This is a broader definition
+	      than that in <xref target="RFC8020">NXDOMAIN</xref>.
            </t>
        </section>
    </section>
@@ -213,6 +221,42 @@ _dmarc.gov.example.
              PSD ".example", the PSO would post DMARC policy in a TXT
              record at "_dmarc.example".
          </t>
+     </section>
+     <section title="Section 6.3 General Record Format">
+	 <t>A new tag is added after fo:</t>
+	 <t><list style="hanging">
+	    <t hangText="np:"> Requested Mail Receiver policy for non-existent
+	     subdomains (plain-text; OPTIONAL).  Indicates the policy to be
+	     enacted by the Receiver at the request of the Domain Owner.  It
+	     applies only to non-existent subdomains of the domain queried and
+	     not to either existing subdomains or the domain itself.  Its
+	     syntax is identical to that of the "p" tag defined below.  If
+	     the 'np' tag is absent, the policy specified by the "sp" tag (if
+	     the 'sp' tag is present) or the policy specified by the "p" tag,
+	     if the 'sp' tag is not present, MUST be applied for non-existent
+	     subdomains.  Note that "np" will be ignored for DMARC records
+	     published on subdomains of Organizational Domains and PSDs due to
+	     the effect of the DMARC policy discovery mechanism described in
+	     <xref target="RFC7489">DMARC</xref> Section 6.6.3.
+	    </t>
+         </list></t>
+	 <t>The following tag definitions from <xref target="RFC7489">DMARC</xref>
+	    are updated:
+	 </t>
+	 <t><list style="hanging">
+	    <t hangText="p:">The sentence 'Policy applies to the domain queried
+	      and to subdomains, unless subdomain policy is explicitly described
+	      using the "sp" tag' is updated to read 'Policy applies to the domain
+              queried and to subdomains, unless subdomain policy is explicitly
+              described using the "sp" or "np" tags.'
+	    </t>
+	    <t hangText="sp:">The sentence 'If absent, the policy specified by
+	      the "p" tag MUST be applied for subdomains' is updated to read
+	      'If both the 'sp' tag is absent and the 'np' tag is either absent
+	      or not applicable, the policy specified by the "p" tag MUST be
+	      applied for subdomains.
+	    </t>
+         </list></t>
      </section>
      <section title="Section 6.5.  Domain Owner Actions">
          <t>In addition to the <xref target="RFC7489">DMARC</xref> domain owner
@@ -257,14 +301,14 @@ _dmarc.gov.example.
    </section>
 
    <section anchor="privacy" title="Privacy Considerations">
-      <t>These privacy considerations are developed based on the requiremetns of
+      <t>These privacy considerations are developed based on the requirements of
           <xref target="RFC6973"/>.  The Privacy Considerations of <xref
           target="RFC7489"/> apply to this document.
       </t>
       <section anchor="leakage" title="Feedback leakage">
           <t>Providing feedback reporting to PSOs can, in some cases, create
               leakage of information outside of an organization to the PSO.
-	      This leakage could be potentially be utilized as part of a program
+	      This leakage could potentially be utilized as part of a program
 	      of pervasive surveillance (See <xref target="RFC7624"/>).  There
 	      are roughly three cases to consider:
           </t>
@@ -317,7 +361,7 @@ _dmarc.gov.example.
 	      domains except in cases where the reporter knows that PSO
 	      requires use of DMARC.
 	  </t>
-      </section>
+       </section>
    </section>
 
    <section title="Security Considerations">
@@ -333,7 +377,23 @@ _dmarc.gov.example.
    </section>
 
    <section anchor="iana" title="IANA Considerations">
-       <t>This document does not require any IANA actions.</t>
+       <t>This section describes actions requested to be completed by IANA.</t>
+
+       <section anchor="iana1" title="Subdomain Policy Tag">
+           <t>IANA is requested to add a new tag to DMARC Tag Registry in the Domain-based Message Authentication,
+               Reporting, and Conformance (DMARC) Parameters Registry.
+           </t>
+           <t>The entry is as follows:
+            <figure><artwork>
++----------+-----------+---------+-------------------------------+
+| Tag Name | Reference | Status  | Description                   |
++----------+-----------+---------+-------------------------------+
+| np       | this      | current | Requested handling policy for |
+|          | document  |         | non-existent subdomains       |
++----------+-----------+---------+-------------------------------+
+            </artwork> </figure>
+           </t>
+       </section>
    </section>
  </middle>
 
@@ -373,6 +433,11 @@ _dmarc.gov.example.
    </references>
 
    <section anchor="experiment" title="The Experiment">
+      <t> There are two experimental questions addressed in this document: one
+	  regarding mitigation of PSD related privacy concerns and the other
+	  on the utility of specifying separate DMARC policies for non-existent
+	      sub-domains.</t>
+      <section title="PSD DMARC Privacy Concern Mitigation">
       <t> To mitigate the privacy concerns associated with Multi-organization
 	  PSDs that do not mandate DMARC usage, see <xref target="leakage"/>,
 	  a mechanism to indicate which PSDs do not present this privacy risk is
@@ -414,9 +479,22 @@ _dmarc.gov.example.
 		  </t>
 		  <t> An IANA registry</t>
 	  </list></t>
-    </section>
+        </section>
+       <section title="Non-Existent Subdomain Policy">
+	<t> PSOs that plan to implement PSD DMARC have indicated that the
+            ability to describe distinct policies for existing and non-
+	    existing sub-domains would facilitate PSD DMARC deployment.  There
+	    are also suggestions that it would be more generally useful for
+	    DMARC.
+	</t>
+	<t> During the period of the experiment, uptake of the new 'np' tag
+	    will be evaluated to support assessment of the utility of
+	    including 'np' in a future, non-experimental update.
+	</t>
+       </section>
+   </section>
    <section anchor="registry" title="DMARC PSD Registry Examples">
-	   <t> To faciliate experimentation around data leakage mitigation, samples
+	   <t> To facilitate experimentation around data leakage mitigation, samples
 	       of the DNS based and IANA like registries are available at
 	       <xref target="psddmarc.org"/>.
            </t>
@@ -427,7 +505,7 @@ _dmarc.gov.example.
 	       Usage of the service is described on the web site.
            </t>
         </section>
-        <section anchor="iana1" title="DMARC Public Suffix Domain (PSD) Registry">
+        <section anchor="iana2" title="DMARC Public Suffix Domain (PSD) Registry">
 	   <t> <xref target="psddmarc.org"/> provides an IANA like DMARC Public
 	       Suffix Domain (PSD) Registry as a stand-alone DNS query service.  It
 	       follows the contents and structure described below.  There is a Comma
@@ -458,6 +536,7 @@ _dmarc.gov.example.
            </t>
        </section>
    </section>
+
    <section anchor="implementation" title="Implementation">
       <t> There is one known implementation of PSD DMARC available for testing.
       </t>
