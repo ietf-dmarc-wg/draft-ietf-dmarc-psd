@@ -61,16 +61,17 @@
 
  <middle>
    <section anchor="intro" title="Introduction">
-     <t><xref target="RFC7489">DMARC</xref> provides a mechanism for publishing
-         organizational policy information to email receivers.  <xref
-         target="RFC7489">DMARC</xref> allows policy to be specified for both
-         individual domains and sets of domains within a single organization.
-         For domains above the organizational level in the DNS tree, policy can
-         only be published for the exact domain.  There is no method available
-         to such domains to express lower level policy or receive feedback
-         reporting for sets of domains.  This prevents policy application to
-         non-existent domains and identification of domain abuse in email, which
-         can be important for brand and consumer protection.
+     <t><xref target="RFC7489">DMARC</xref> provides a mechanism for
+         publishing organizational policy information to email receivers.
+         <xref target="RFC7489">DMARC</xref> allows policy to be specified for
+         both individual domains and for organizational domains and their
+	 sub-domains within a single organization.  For TLDs and domains that
+	 exist between TLDs and organization level domains, policy can only be
+	 published for the exact domain.  No method is available for such
+	 domains to express policy or receive feedback reporting for
+	 sub-domains.  This missing method allows for the abuse of
+	 non-existent organizational-level domains and prevents identification
+	 of domain abuse in email.
      </t>
      <t>As an example, imagine a country code TLD (ccTLD) which has public
          subdomains for government and commercial use (.gov.example and
@@ -84,21 +85,20 @@
          <figure><artwork>
 _dmarc.gov.example.
          </artwork></figure>
-         This would provide policy and feedback for mail sent from @gov.example,
-         but not @tax.gov.example and there is no way to publish an
-         organizational level policy that would do so.  While, in theory,
-         receivers could reject mail from non-existent domains, not all
-         receivers do so.  Non-existence of the sending domain can be a factor
-         in a mail delivery decision, but is not generally treated as definitive
-         on its own.
+         This DMARC record provides policy and a reporting destination for
+	 mail sent from @gov.example. However, due to DMARC's current method
+	 of discovering and applying policy at the organizational domain
+	 level, the non-existent organizational domain of @tax.gov.example
+	 does not and cannot fall under a DMARC policy.
      </t>
      <t>This memo provides a simple extension to <xref target="RFC7489">DMARC
          </xref> to allow operators of Public Suffix Domains (PSDs) to express
-         policy for groups of subdomains, extends the <xref target="RFC7489">
-         DMARC</xref> policy query functionality to detect and process such a
-         policy, describes receiver feedback for such policies, and provides
-         controls to mitigate potential privacy considerations associated with
-         this extension.
+	 policy at the level of the PSD that covers all organizational domains
+	 that do not explicitly publish DMARC records, extends the <xref
+	 target="RFC7489"> DMARC</xref> policy query functionality to detect
+	 and process such a policy, describes receiver feedback for such
+	 policies, and provides controls to mitigate potential privacy
+	 considerations associated with this extension.
      </t>
      <t>This memo also provides a new <xref target="RFC7489">DMARC</xref> tag
 	to indicate requested handling policy for non-existent subdommains.
@@ -184,7 +184,7 @@ _dmarc.gov.example.
        </section>
        <section anchor="lpsd" title="Longest PSD">
            <t>Organizational Domain (<xref target="RFC7489">DMARC</xref> Section
-               3.2) with one label removed.
+               3.2) with one left-most label removed.
            </t>
        </section>
        <section title="Public Suffix Operator (PSO)">
@@ -369,6 +369,12 @@ _dmarc.gov.example.
           <xref target="RFC7489"/> and <xref target="RFC7960"/>.
       </t>
       <t> The risks of the issues identified in <xref target="RFC7489"/>,
+	  Section 12.3, DNS Security, are amplified by PSD DMARC.  In
+	  particular, DNS cache poisoning (or Name Chaining), see <xref
+	  target="RFC3833"/> for details, consequences are increased because a
+	  sucessful attack would potentially have a much wider scope.
+      </t>
+      <t> The risks of the issues identified in <xref target="RFC7489"/>,
 	  Section 12.5, External Reporting Addresses, are amplified by PSD
 	  DMARC.  By design, PSD DMARC causes unrequested reporting of feedback
 	  to entities external to the Organizational Domain.  This is discussed
@@ -405,6 +411,7 @@ _dmarc.gov.example.
    </references>
 
    <references title="Informative References">
+      <?rfc include="reference.RFC.3833" ?>
       <?rfc include="reference.RFC.5226" ?>
       <?rfc include="reference.RFC.5598" ?>
       <?rfc include="reference.RFC.6973" ?>
