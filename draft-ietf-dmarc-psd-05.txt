@@ -80,10 +80,10 @@ Table of Contents
      2.6.  Non-existent Domains  . . . . . . . . . . . . . . . . . .   5
    3.  PSD DMARC Updates to DMARC Requirements . . . . . . . . . . .   5
      3.1.  General Updates . . . . . . . . . . . . . . . . . . . . .   5
-     3.2.  Section 6.1 DMARC Policy Record . . . . . . . . . . . . .   6
+     3.2.  Section 6.1 DMARC Policy Record . . . . . . . . . . . . .   5
      3.3.  Section 6.3 General Record Format . . . . . . . . . . . .   6
      3.4.  Section 6.5.  Domain Owner Actions  . . . . . . . . . . .   6
-     3.5.  Section 6.6.3.  Policy Discovery  . . . . . . . . . . . .   7
+     3.5.  Section 6.6.3.  Policy Discovery  . . . . . . . . . . . .   6
      3.6.  Section 7.  DMARC Feedback  . . . . . . . . . . . . . . .   7
    4.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   7
      4.1.  Feedback leakage  . . . . . . . . . . . . . . . . . . . .   7
@@ -95,7 +95,7 @@ Table of Contents
      7.2.  Informative References  . . . . . . . . . . . . . . . . .   9
    Appendix A.  The Experiment . . . . . . . . . . . . . . . . . . .  10
      A.1.  PSD DMARC Privacy Concern Mitigation  . . . . . . . . . .  11
-     A.2.  Non-Existent Subdomain Policy . . . . . . . . . . . . . .  12
+     A.2.  Non-Existent Subdomain Policy . . . . . . . . . . . . . .  11
    Appendix B.  DMARC PSD Registry Examples  . . . . . . . . . . . .  12
      B.1.  DMARC PSD DNS Query Service . . . . . . . . . . . . . . .  12
      B.2.  DMARC Public Suffix Domain (PSD) Registry . . . . . . . .  12
@@ -204,11 +204,6 @@ Internet-Draft                  PSD DMARC                      July 2019
    [RFC7960].  These issues are not applicable to PSDs, since they
    (e.g., the ".gov.example" used above) do not send mail.
 
-   DMARC [RFC7489], by design, does not support usage by PSOs.  For PSDs
-   that require use of DMARC [RFC7489], an extension of DMARC reporting
-   and enforcement capability is needed for PSO to effectively manage
-   and monitor implementation of PSD requirements.
-
 2.  Terminology and Definitions
 
    This section defines terms used in the rest of the document.
@@ -218,6 +213,11 @@ Internet-Draft                  PSD DMARC                      July 2019
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
    "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+
+
 
 
 
@@ -226,9 +226,6 @@ Kitterman               Expires January 27, 2020                [Page 4]
 Internet-Draft                  PSD DMARC                      July 2019
 
 
-   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
-   capitals, as shown here.
-
 2.2.  Public Suffix Domain (PSD)
 
    The global Internet Domain Name System (DNS) is documented in
@@ -236,7 +233,7 @@ Internet-Draft                  PSD DMARC                      July 2019
    starting with root, ".", immediately below which are Top Level Domain
    names such as ".com" and ".us".  They are not available for private
    registration.  In many cases the public portion of the DNS tree is
-   more than one level deep.  PSD DMARC includes all public domains
+   more than one level deep.  PSD DMARC applies to all public domains
    above the organizational level in the tree, e.g., ".gov.uk".
 
 2.3.  Longest PSD
@@ -271,8 +268,11 @@ Internet-Draft                  PSD DMARC                      July 2019
 
    References to "Domain Owners" also apply to PSOs.
 
+3.2.  Section 6.1 DMARC Policy Record
 
-
+   PSD DMARC records are published as a subdomain of the PSD.  For the
+   PSD ".example", the PSO would post DMARC policy in a TXT record at
+   "_dmarc.example".
 
 
 
@@ -281,12 +281,6 @@ Kitterman               Expires January 27, 2020                [Page 5]
 
 Internet-Draft                  PSD DMARC                      July 2019
 
-
-3.2.  Section 6.1 DMARC Policy Record
-
-   PSD DMARC records are published as a subdomain of the PSD.  For the
-   PSD ".example", the PSO would post DMARC policy in a TXT record at
-   "_dmarc.example".
 
 3.3.  Section 6.3 General Record Format
 
@@ -326,18 +320,6 @@ Internet-Draft                  PSD DMARC                      July 2019
    require use of DMARC ought to make that information available to
    receivers.
 
-
-
-
-
-
-
-
-Kitterman               Expires January 27, 2020                [Page 6]
-
-Internet-Draft                  PSD DMARC                      July 2019
-
-
 3.5.  Section 6.6.3.  Policy Discovery
 
    A new step between step 3 and 4 is added:
@@ -348,6 +330,13 @@ Internet-Draft                  PSD DMARC                      July 2019
       a DMARC TXT record at the DNS domain matching the longest PSD
       (Section 2.3) in place of the RFC5322.From domain in the message
       (if different).  A possibly empty set of records is returned.
+
+
+
+Kitterman               Expires January 27, 2020                [Page 6]
+
+Internet-Draft                  PSD DMARC                      July 2019
+
 
    As an example, for a message with the Organizational Domain of
    "example.compute.cloudcompany.com.cctld", the query for PSD DMARC
@@ -365,8 +354,8 @@ Internet-Draft                  PSD DMARC                      July 2019
 3.6.  Section 7.  DMARC Feedback
 
    Operational note for PSD DMARC: For PSOs, feedback for non-existent
-   domains is desired and useful.  See Section 4 for discussion of
-   Privacy Considerations.
+   domains is desirable and useful, just as it is for org-level DMARC
+   operators.  See Section 4 for discussion of Privacy Considerations.
 
 4.  Privacy Considerations
 
@@ -386,14 +375,6 @@ Internet-Draft                  PSD DMARC                      July 2019
       based on PSD DMARC have the potential to contain information about
       emails related to entities managed by the organization.  Since
       both the PSO and the Organizational Domain owners are common,
-
-
-
-Kitterman               Expires January 27, 2020                [Page 7]
-
-Internet-Draft                  PSD DMARC                      July 2019
-
-
       there is no additional privacy risk for either normal or non-
       existent Domain reporting due to PSD DMARC.
 
@@ -404,6 +385,15 @@ Internet-Draft                  PSD DMARC                      July 2019
       feedback reporting addresses (RUA and RUF) of the organization (or
       hosts) will be used.  The only direct feedback leakage risk for
       these PSDs are for Organizational Domains that are out of
+
+
+
+
+Kitterman               Expires January 27, 2020                [Page 7]
+
+Internet-Draft                  PSD DMARC                      July 2019
+
+
       compliance with PSD policy.  Data on non-existent cousin domains
       would be sent to the PSO.
 
@@ -443,18 +433,22 @@ Internet-Draft                  PSD DMARC                      July 2019
    are increased because a sucessful attack would potentially have a
    much wider scope.
 
+   The risks of the issues identified in [RFC7489], Section 12.5,
+   External Reporting Addresses, are amplified by PSD DMARC.  By design,
+   PSD DMARC causes unrequested reporting of feedback to entities
+   external to the Organizational Domain.  This is discussed in more
+   detail in Section 4.
+
+
+
+
+
 
 
 Kitterman               Expires January 27, 2020                [Page 8]
 
 Internet-Draft                  PSD DMARC                      July 2019
 
-
-   The risks of the issues identified in [RFC7489], Section 12.5,
-   External Reporting Addresses, are amplified by PSD DMARC.  By design,
-   PSD DMARC causes unrequested reporting of feedback to entities
-   external to the Organizational Domain.  This is discussed in more
-   detail in Section 4.
 
 6.  IANA Considerations
 
@@ -499,15 +493,18 @@ Internet-Draft                  PSD DMARC                      July 2019
               multiple, "PSD DMARC Web Site", April 2019,
               <https://psddmarc.org/>.
 
+   [PSL]      multiple, "Public Suffix List", April 2019,
+              <https://publicsuffix.org/>.
+
+
+
+
 
 
 Kitterman               Expires January 27, 2020                [Page 9]
 
 Internet-Draft                  PSD DMARC                      July 2019
 
-
-   [PSL]      multiple, "Public Suffix List", April 2019,
-              <https://publicsuffix.org/>.
 
    [RFC3833]  Atkins, D. and R. Austein, "Threat Analysis of the Domain
               Name System (DNS)", RFC 3833, DOI 10.17487/RFC3833, August
@@ -553,7 +550,10 @@ Appendix A.  The Experiment
    the utility of specifying separate DMARC policies for non-existent
    sub-domains.
 
-
+   Aditionally, as of the writing of this document operational and
+   policy constraints prevent this experiment from being deployed
+   globally.  If the experiment shows that PSD DMARC solves a real
+   problem and can be used at a large scale, the results could prove to
 
 
 
@@ -562,10 +562,6 @@ Kitterman               Expires January 27, 2020               [Page 10]
 Internet-Draft                  PSD DMARC                      July 2019
 
 
-   Aditionally, as of the writing of this document operational and
-   policy constraints prevent this experiment from being deployed
-   globally.  If the experiment shows that PSD DMARC solves a real
-   problem and can be used at a large scale, the results could prove to
    be useful in removing constraints outside of the IETF that would
    permit broader deployment".
 
@@ -609,6 +605,10 @@ A.1.  PSD DMARC Privacy Concern Mitigation
 
    o  An IANA registry
 
+A.2.  Non-Existent Subdomain Policy
+
+   PSOs that plan to implement PSD DMARC have indicated that the ability
+   to describe distinct policies for existing and non- existing sub-
 
 
 
@@ -618,10 +618,6 @@ Kitterman               Expires January 27, 2020               [Page 11]
 Internet-Draft                  PSD DMARC                      July 2019
 
 
-A.2.  Non-Existent Subdomain Policy
-
-   PSOs that plan to implement PSD DMARC have indicated that the ability
-   to describe distinct policies for existing and non- existing sub-
    domains would facilitate PSD DMARC deployment.  There are also
    suggestions that it would be more generally useful for DMARC.
 
@@ -660,20 +656,6 @@ B.2.  DMARC Public Suffix Domain (PSD) Registry
 
    The initial set of entries in this registry is as follows:
 
-
-
-
-
-
-
-
-
-
-Kitterman               Expires January 27, 2020               [Page 12]
-
-Internet-Draft                  PSD DMARC                      July 2019
-
-
    +-------------+---------------+
    |    PSD      | Status        |
    +-------------+---------------+
@@ -683,6 +665,14 @@ Internet-Draft                  PSD DMARC                      July 2019
    +-------------+---------------+
    | .gov.uk     | current       |
    +-------------+---------------+
+
+
+
+
+Kitterman               Expires January 27, 2020               [Page 12]
+
+Internet-Draft                  PSD DMARC                      July 2019
+
 
 Appendix C.  Implementation
 
@@ -716,6 +706,16 @@ Author's Address
 
    Phone: +1 301 325-5475
    Email: scott@kitterman.com
+
+
+
+
+
+
+
+
+
+
 
 
 

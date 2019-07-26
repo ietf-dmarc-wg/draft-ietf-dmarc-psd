@@ -150,12 +150,6 @@ _dmarc.gov.example.
          These issues are not applicable to PSDs, since they (e.g., the
          ".gov.example" used above) do not send mail.
      </t>
-     <t><xref target="RFC7489">DMARC</xref>, by design, does not support
-         usage by PSOs.  For PSDs that require use of <xref
-	 target="RFC7489">DMARC</xref>, an extension of DMARC reporting and
-	 enforcement capability is needed for PSO to effectively manage and
-	 monitor implementation of PSD requirements.
-     </t>
 
    </section>
 
@@ -177,9 +171,9 @@ _dmarc.gov.example.
                starting with root, ".", immediately below which are Top Level
                Domain names such as ".com" and ".us".  They are not available
                for private registration.  In many cases the public portion of
-               the DNS tree is more than one level deep.  PSD DMARC includes all
-               public domains above the organizational level in the tree, e.g.,
-               ".gov.uk".
+	       the DNS tree is more than one level deep.  PSD DMARC applies to
+	       all public domains above the organizational level in the tree,
+	       e.g., ".gov.uk".
            </t>
        </section>
        <section anchor="lpsd" title="Longest PSD">
@@ -294,8 +288,9 @@ _dmarc.gov.example.
      </section>
      <section title="Section 7.  DMARC Feedback">
          <t> Operational note for PSD DMARC: For PSOs, feedback for non-existent
-             domains is desired and useful.  See <xref target="privacy"/> for
-	     discussion of Privacy Considerations.
+	     domains is desirable and useful, just as it is for org-level
+	     DMARC operators.  See <xref target="privacy"/> for discussion of
+	     Privacy Considerations.
          </t>
      </section>
    </section>
