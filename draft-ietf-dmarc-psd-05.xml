@@ -217,7 +217,7 @@ _dmarc.gov.example.
          </t>
      </section>
      <section title="Section 6.3 General Record Format">
-	 <t>A new tag is added after fo:</t>
+	 <t>A new tag is added after "fo":</t>
 	 <t><list style="hanging">
 	    <t hangText="np:"> Requested Mail Receiver policy for non-existent
 	     subdomains (plain-text; OPTIONAL).  Indicates the policy to be

@@ -284,7 +284,7 @@ Internet-Draft                  PSD DMARC                      July 2019
 
 3.3.  Section 6.3 General Record Format
 
-   A new tag is added after fo:
+   A new tag is added after "fo":
 
    np:  Requested Mail Receiver policy for non-existent subdomains
       (plain-text; OPTIONAL).  Indicates the policy to be enacted by the
