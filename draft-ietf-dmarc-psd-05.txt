@@ -563,7 +563,7 @@ Internet-Draft                  PSD DMARC                      July 2019
 
 
    be useful in removing constraints outside of the IETF that would
-   permit broader deployment".
+   permit broader deployment.
 
 A.1.  PSD DMARC Privacy Concern Mitigation
 
