@@ -298,7 +298,7 @@ Internet-Draft                  PSD DMARC                      July 2019
 
 3.3.  Section 6.3 General Record Format
 
-   A new tag is added after "fo":
+   A new tag is added after fo:
 
    np:  Requested Mail Receiver policy for non-existent subdomains
       (plain-text; OPTIONAL).  Indicates the policy to be enacted by the
@@ -585,7 +585,7 @@ Appendix A.  The Experiment
    globally.  If the experiment shows that PSD DMARC solves a real
    problem and can be used at a large scale, the results could prove to
    be useful in removing constraints outside of the IETF that would
-   permit broader deployment.
+   permit broader deployment".
 
 A.1.  PSD DMARC Privacy Concern Mitigation
 
