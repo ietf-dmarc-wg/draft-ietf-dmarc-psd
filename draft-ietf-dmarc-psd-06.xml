@@ -240,7 +240,7 @@ _dmarc.gov.example.
          <t>References to "Domain Owners" also apply to PSOs.</t>
      </section>
      <section title="Section 6.3 General Record Format">
-	 <t>A new tag is added after fo:</t>
+	 <t>A new tag is added after "fo":</t>
 	 <t><list style="hanging">
 	    <t hangText="np:"> Requested Mail Receiver policy for non-existent
 	     subdomains (plain-text; OPTIONAL).  Indicates the policy to be
@@ -482,7 +482,7 @@ _dmarc.gov.example.
           globally. If the experiment shows that PSD DMARC solves a real
           problem and can be used at a large scale, the results could prove
           to be useful in removing constraints outside of the IETF that would
-          permit broader deployment".
+          permit broader deployment.
       </t>
       <section title="PSD DMARC Privacy Concern Mitigation">
       <t> To mitigate the privacy concerns associated with Multi-organization
