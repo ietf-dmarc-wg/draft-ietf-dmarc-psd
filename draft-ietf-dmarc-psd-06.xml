@@ -43,18 +43,23 @@
    <keyword>TLD</keyword>
 
    <abstract>
-     <t>DMARC (Domain-based Message Authentication, Reporting, and Conformance) 
-         is a scalable mechanism by which a mail-originating organization can
-         express domain-level policies and preferences for message validation,
-         disposition, and reporting, that a mail-receiving organization can use
-	 to improve mail handling.  DMARC policies can be applied to individual
-	 domains or to all domains within an organization.  The design of DMARC
-	 precludes grouping policies for domains based on policy published above
-	 the organizational level, such as TLDs (Top Level Domains).  Domains at
-	 this  higher level of the DNS tree (but not necessarily at the top of the
-	 DNS tree) can be collectively referred to as Public Suffix Domains
-	 (PSDs).  This document describes an extension to DMARC to enable DMARC
-	 functionality PSDs.</t>
+      <t>DMARC (Domain-based Message Authentication, Reporting, and
+         Conformance) is a scalable mechanism by which a mail-originating
+         organization can express domain-level policies and preferences for
+         message validation, disposition, and reporting, that a mail-receiving
+         organization can use to improve mail handling.  The design of DMARC
+         presumes that domain names represent either nodes in the tree below
+         which registrations occur, or nodes where registrations have occurred;
+         it does not permit a domain name to have both of these properties
+         simultaneously.  Since its deployment in 2015, use of DMARC has shown
+         a clear need for the ability to express policy for these domains as
+         well.</t>
+      <t>Domains at which registrations can occur are referred to as Public
+         Suffix Domains (PSDs).  This document describes an extension to DMARC
+         to enable DMARC functionality for PSDs.</t>
+      <t>This document also seeks to address implementations that consider a
+         domain on a public Suffix list to be ineligible for DMARC
+         enforcement.</t>
    </abstract>
  </front>
 
@@ -62,21 +67,31 @@
    <section anchor="intro" title="Introduction">
      <t><xref target="RFC7489">DMARC</xref> provides a mechanism for
          publishing organizational policy information to email receivers.
-         DMARC allows policy to be specified for
-         both individual domains and for organizational domains and their
-	 sub-domains within a single organization.  For TLDs and domains that
-	 exist between TLDs and organization level domains, policy can only be
-	 published for the exact domain.  No method is available for such
-	 domains to express policy or receive feedback reporting for
-	 sub-domains.  This missing method allows for the abuse of
-	 non-existent organizational-level domains and prevents identification
-	 of domain abuse in email.
+         DMARC allows policy to be specified for both individual domains and
+         for organizational domains and their sub-domains within a single
+         organization.  DMARC leverages public suffix lists to determine which
+         domains are organizational domains.  It presumes that public suffix
+         list listed domains are not organizational domains and not subject to
+         DMARC processing; domains are either organizational domains,
+         sub-domains of organizational domains, or listed on a public suffix
+         list.  For domains listed in a public suffix list, i.e. TLDs and
+         domains that exist between TLDs and organization level domains,
+         policy can only be published for the exact domain.  No method is
+         available for these domains to express policy or receive feedback
+         reporting for sub-domains.  This missing method allows for the abuse
+         of non-existent organizational-level domains and prevents
+         identification of domain abuse in email.
      </t>
-     <t>As an example, imagine a country code TLD (ccTLD) which has public
+     <t> As an example, imagine a country code TLD (ccTLD) which has public
          subdomains for government and commercial use (.gov.example and
-         .com.example).  Within the .gov.example public suffix, use of DMARC
-         has been mandated and .gov.example has
-         published its own DMARC record:
+         .com.example).  Suppose there exists a registered domain
+         "tax.gov.example" that is responsible for taxation in this imagined
+         country.  However, by exploiting the typically unauthenticated nature of
+         email, there are regular malicious campaigns to impersonate this
+         organization that use similar-looking ("cousin") domains such as
+         "t4x.gov.example".  These domains are not registered.  Within the
+         ".gov.example" public suffix, use of DMARC has been mandated, so
+         "gov.example" publishes the following DMARC record:
          <figure><artwork>
 "v=DMARC1; p=reject; rua=mailto:dmarc@dmarc.service.gov.example"
         </artwork></figure>
@@ -85,12 +100,18 @@
 _dmarc.gov.example.
          </artwork></figure>
          This DMARC record provides policy and a reporting destination for
-	 mail sent from @gov.example. However, due to DMARC's current method
-	 of discovering and applying policy at the organizational domain
-	 level, the non-existent organizational domain of @tax.gov.example
-	 does not and cannot fall under a DMARC policy.
+         mail sent from @gov.example. However, due to DMARC's current method
+         of discovering and applying policy at the organizational domain
+         level, the non-existent organizational domain of @tax.gov.example
+         does not and cannot fall under a DMARC policy.
      </t>
-     <t>This document provides a simple extension to <xref target="RFC7489">DMARC
+     <t> Defensively registering all variants of "tax" is obviously not a scalable
+         strategy.  The intent of this specification, therefore, is to enhance the
+         DMARC algorithm by enabling an agent receiving such a message to be able to
+         determine that a relevant policy is present at "gov.example", which is
+         precluded by the current DMARC algorithm.
+     </t>
+     <t> This document provides a simple extension to <xref target="RFC7489">DMARC
          </xref> to allow operators of Public Suffix Domains (PSDs) to express
 	 policy at the level of the PSD that covers all organizational domains
 	 that do not explicitly publish DMARC records, extends the DMARC
@@ -127,7 +148,8 @@ _dmarc.gov.example.
                       domains, but listed in the Public Suffix List.  They are
                       treated as Public for DMARC
                       purposes.  They require the same protections as DMARC
-                      Organizational Domains, but are currently excluded.
+                      Organizational Domains, but are currently unable to
+                      benefit from DMARC.
                   </t>
                   <t>Multi-organization PSDs that require DMARC usage (e.g.,
                       ".bank"):  Because existing Organizational Domains using
@@ -138,18 +160,6 @@ _dmarc.gov.example.
                       including cousin domains of registered organizations.
                   </t>
           </list></t>
-     <t>As an example, take the ".gov.example" described above and add that for
-         this entity emails about tax returns are sent from tax.gov.example.  It
-         would not be surprising if fraudulent emails were sent purporting to be
-         from taxes.gov.example (taxes is a cousin of tax - different enough to
-         evade DMARC protection, but similar enough to potentially confuse
-         users).  As defined in <xref target="RFC7489">DMARC</xref>, a DMARC
-         record could be published for tax.gov.example, but there is no general
-         solution to publishing a DMARC policy to defend against abuse of
-         non-existent cousins such as taxes.gov.example.  While an explicit
-         record could be published for this one domain, the universe of possible
-         cousins is such that this approach does not scale.
-     </t>
      <t>Due to the design of <xref target="RFC7489">DMARC</xref> and the nature
          of the Internet <xref target="RFC5598">email architecture</xref>, there
          are interoperability issues associated with <xref target="RFC7489">
@@ -174,17 +184,30 @@ _dmarc.gov.example.
            </t>
        </section>
        <section title="Public Suffix Domain (PSD)">
-           <t>The global Internet Domain Name System (DNS) is documented in
+           <t> The global Internet Domain Name System (DNS) is documented in
                numerous Requests for Comment (RFC).  It defines a tree of names
                starting with root, ".", immediately below which are Top Level
                Domain names such as ".com" and ".us".  They are not available
                for private registration.  In many cases the public portion of
-	       the DNS tree is more than one level deep.
+               the DNS tree is more than one level deep.
+               
+               The domain name structure consists of a tree of names, each of
+               which is made of a sequence of words ("labels") separated by
+               period characters.  The root of the tree is simply called ".".
+               The Internet community at large, through processes and policies
+               external to this work, selects points in this tree at which to
+               register domain names "owned" by independent organizations.
+               Real-world examples are ".com", ".org", ".us", and ".gov.uk".
+               Names at which such registrations occur are called Public
+               Suffix Domains (PSDs), and a registration consists of a label
+               selected by the registrant to which a desirable PSD is
+               appended.  For example, "ietf.org" is a registered domain name,
+               and ".org" is its PSD.
            </t>
        </section>
        <section anchor="lpsd" title="Longest PSD">
-           <t>Organizational Domain (<xref target="RFC7489">DMARC</xref> Section
-               3.2) with one left-most label removed.
+           <t> The longest PSD is the PSD matching more labels in the domain
+               name under evaluation than any other public suffix list entry.
            </t>
        </section>
        <section title="Public Suffix Operator (PSO)">
@@ -215,12 +238,6 @@ _dmarc.gov.example.
 
      <section title="General Updates">
          <t>References to "Domain Owners" also apply to PSOs.</t>
-     </section>
-     <section title="Section 6.1 DMARC Policy Record">
-         <t>PSD DMARC records are published as a subdomain of the PSD.  For the
-             PSD ".example", the PSO would post DMARC policy in a TXT
-             record at "_dmarc.example".
-         </t>
      </section>
      <section title="Section 6.3 General Record Format">
 	 <t>A new tag is added after fo:</t>
@@ -266,6 +283,19 @@ _dmarc.gov.example.
              target="experiment">experiment description</xref>.
          </t>
      </section>
+     <section title="Section 6.6.1.  Extract Author Domain">
+         <t> Experience with DMARC has shown that some implementations
+             short-circuit messages, bypassing DMARC policy application, when
+             the domain name extracted by the receiver (from the RFC5322.From)
+             is on the public suffix list used by the receiver.  This
+             negates the capability being created by this specification.
+             Therefore, the following paragraph is appended to Section 6.6.1
+             of <xref target="RFC7489">DMARC</xref>:
+         </t>
+         <t> Note that domain names that appear on a public suffix list are
+             not exempt from DMARC policy application and reporting.
+         </t>
+     </section>
      <section title="Section 6.6.3.  Policy Discovery">
          <t>A new step between step 3 and 4 is added:</t>
          <t><list style="hanging">
@@ -281,18 +311,17 @@ _dmarc.gov.example.
                </t>
          </list> </t>
          <t>As an example, for a message with the Organizational Domain of
-             "example.compute.cloudcompany.com.cctld", the query for PSD DMARC
-             would use "compute.cloudcompany.com.cctld" as the <xref
+             "example.compute.cloudcompany.com.example", the query for PSD DMARC
+             would use "compute.cloudcompany.com.example" as the <xref
              target="lpsd">longest PSD</xref>.  The receiver would check to see
              if that PSD is listed in the DMARC PSD Registry, and if so, perform
-             the policy lookup at "_dmarc.compute.cloudcompany.com.cctld".
+             the policy lookup at "_dmarc.compute.cloudcompany.com.example".
          </t>
          <t>Note: Because the PSD policy query comes after the Organizational
              Domain policy query, PSD policy is not used for Organizational
-             domains that have published a DMARC
-             policy.  Specifically, this is not a mechanism to provide
-             feedback addresses (RUA/RUF) when an Organizational Domain has
-             declined to do so.
+             domains that have published a DMARC policy.  Specifically, this
+             is not a mechanism to provide feedback addresses (RUA/RUF) when
+             an Organizational Domain has declined to do so.
          </t>
      </section>
      <section title="Section 7.  DMARC Feedback">
