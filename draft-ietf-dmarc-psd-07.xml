@@ -10,7 +10,7 @@
 <?rfc subcompact="no"?>
 
 <rfc category="exp"
-     docName="draft-ietf-dmarc-psd-06"
+     docName="draft-ietf-dmarc-psd-07"
      ipr="trust200902">
 
  <front>
@@ -36,7 +36,7 @@
       </address>
    </author>
 
-   <date month="August" year="2019" />
+   <date month="September" year="2019" />
 
    <keyword>DMARC</keyword>
    <keyword>email authentication</keyword>
