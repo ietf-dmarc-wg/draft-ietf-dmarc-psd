@@ -265,12 +265,12 @@ Internet-Draft                  PSD DMARC                 September 2019
 
 2.3.  Longest PSD
 
-   The longest PSD is the PSD matching more labels in the domain name
-   under evaluation than any other public suffix list entry.
+   The longest PSD is the Organizational Domain with one label removed.
 
 2.4.  Public Suffix Operator (PSO)
 
    A Public Suffix Operator manages operations within its PSD.
+
 
 
 

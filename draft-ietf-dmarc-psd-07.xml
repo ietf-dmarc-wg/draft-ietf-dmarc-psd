@@ -206,9 +206,8 @@ _dmarc.gov.example.
            </t>
        </section>
        <section anchor="lpsd" title="Longest PSD">
-           <t> The longest PSD is the PSD matching more labels in the domain
-               name under evaluation than any other public suffix list entry.
-           </t>
+           <t> The longest PSD is the Organizational Domain with one label
+               removed.</t>
        </section>
        <section title="Public Suffix Operator (PSO)">
            <t>A Public Suffix Operator manages operations within its PSD.
