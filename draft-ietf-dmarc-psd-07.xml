@@ -580,7 +580,20 @@ _dmarc.gov.example.
 +-------------+---------------+
                                 </artwork> </figure>
            </t>
-       </section>
+        </section>
+        <section anchor="pslplus" title="DMARC PSD PSL Extension">
+           <t> <xref target="psddmarc.org"/> provides a PSL like file to enable to
+               facilitate identification of PSD DMARC participants.  Contents are
+               functionally identical to the IANA like registry, but presented in
+               a different format.
+           </t>
+	   <t> When using this approach, the input domain of the extension lookup
+               is supposed to be the output domain of the regular PSL lookup, i.e.
+               the organizational domain.  This alternative data approach is
+               potentially useful since DMARC implementations already need to be
+               able to parse the data format, so it should be easier to implement.
+           </t>
+        </section>
    </section>
 
    <section anchor="implementation" title="Implementation">
