@@ -105,7 +105,7 @@ Table of Contents
      B.1.  DMARC PSD DNS Query Service . . . . . . . . . . . . . . .  13
      B.2.  DMARC Public Suffix Domain (PSD) Registry . . . . . . . .  13
      B.3.  DMARC PSD PSL Extension . . . . . . . . . . . . . . . . .  13
-   Appendix C.  Implementation . . . . . . . . . . . . . . . . . . .  14
+   Appendix C.  Implementations  . . . . . . . . . . . . . . . . . .  14
 
 
 
@@ -730,7 +730,7 @@ Kitterman                 Expires April 2, 2020                [Page 13]
 Internet-Draft                  PSD DMARC                 September 2019
 
 
-Appendix C.  Implementation
+Appendix C.  Implementations
 
    There are two known implementations of PSD DMARC available for
    testing.

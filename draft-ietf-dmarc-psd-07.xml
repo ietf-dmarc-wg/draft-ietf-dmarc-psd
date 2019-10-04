@@ -596,7 +596,7 @@ _dmarc.gov.example.
         </section>
    </section>
 
-   <section anchor="implementation" title="Implementation">
+   <section anchor="implementations" title="Implementations">
       <t> There are two known implementations of PSD DMARC available for testing.
       </t>
       <section title="Authheaders Module">
