@@ -584,7 +584,7 @@ _dmarc.gov.example.
    </section>
 
    <section anchor="implementation" title="Implementation">
-      <t> There is one known implementation of PSD DMARC available for testing.
+      <t> There are two known implementations of PSD DMARC available for testing.
       </t>
       <section title="Authheaders Module">
 	 <t>The authheaders Python module and command line tool is available
@@ -593,7 +593,16 @@ _dmarc.gov.example.
 	 <t>It supports both use of the DNS based query service and download
 	    of the CSV registry file from <xref target="psddmarc.org"/>.
          </t>
-
+      </section>
+      <section title="Zdkimfilter Module">
+	 <t>The zdkimfilter module is a separately available add-on to
+            Courier-MTA.
+	 </t>
+	 <t>Mostly used for DKIM signing, it can be configured to also verify,
+            apply DMARC policies, and send aggregate reports.  For PSD DMARC
+            it uses the PSL extension list approach, which is available from
+            from <xref target="psddmarc.org"/>
+         </t>
       </section>
    </section>
    <section anchor="thanks" title="Acknowledgements" numbered="no">

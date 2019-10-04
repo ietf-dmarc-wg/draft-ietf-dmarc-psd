@@ -114,6 +114,7 @@ Kitterman                 Expires April 2, 2020                 [Page 2]
 Internet-Draft                  PSD DMARC                 September 2019
 
 
+     C.2.  Zdkimfilter Module  . . . . . . . . . . . . . . . . . . .  14
    Acknowledgements  . . . . . . . . . . . . . . . . . . . . . . . .  14
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  14
 
@@ -161,7 +162,6 @@ Internet-Draft                  PSD DMARC                 September 2019
    Defensively registering all variants of "tax" is obviously not a
    scalable strategy.  The intent of this specification, therefore, is
    to enhance the DMARC algorithm by enabling an agent receiving such a
-
 
 
 
@@ -711,7 +711,8 @@ B.2.  DMARC Public Suffix Domain (PSD) Registry
 
 Appendix C.  Implementation
 
-   There is one known implementation of PSD DMARC available for testing.
+   There are two known implementations of PSD DMARC available for
+   testing.
 
 C.1.  Authheaders Module
 
@@ -724,11 +725,20 @@ C.1.  Authheaders Module
 
 
 
-
 Kitterman                 Expires April 2, 2020                [Page 13]
 
 Internet-Draft                  PSD DMARC                 September 2019
 
+
+C.2.  Zdkimfilter Module
+
+   The zdkimfilter module is a separately available add-on to Courier-
+   MTA.
+
+   Mostly used for DKIM signing, it can be configured to also verify,
+   apply DMARC policies, and send aggregate reports.  For PSD DMARC it
+   uses the PSL extension list approach, which is available from from
+   [psddmarc.org]
 
 Acknowledgements
 
@@ -750,16 +760,6 @@ Author's Address
 
    Phone: +1 301 325-5475
    Email: scott@kitterman.com
-
-
-
-
-
-
-
-
-
-
 
 
 
