@@ -4,8 +4,8 @@
 
 Network Working Group                                       S. Kitterman
 Internet-Draft                                    fTLD Registry Services
-Intended status: Experimental                         September 30, 2019
-Expires: April 2, 2020
+Intended status: Experimental                           October 14, 2019
+Expires: April 16, 2020
 
 
 DMARC (Domain-based Message Authentication, Reporting, and Conformance)
@@ -49,13 +49,13 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 2, 2020.
+   This Internet-Draft will expire on April 16, 2020.
 
 
 
-Kitterman                 Expires April 2, 2020                 [Page 1]
+Kitterman                Expires April 16, 2020                 [Page 1]
 
-Internet-Draft                  PSD DMARC                 September 2019
+Internet-Draft                  PSD DMARC                   October 2019
 
 
 Copyright Notice
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Kitterman                 Expires April 2, 2020                 [Page 2]
+Kitterman                Expires April 16, 2020                 [Page 2]
 
-Internet-Draft                  PSD DMARC                 September 2019
+Internet-Draft                  PSD DMARC                   October 2019
 
 
      C.1.  Authheaders Module  . . . . . . . . . . . . . . . . . . .  14
@@ -165,9 +165,9 @@ Internet-Draft                  PSD DMARC                 September 2019
 
 
 
-Kitterman                 Expires April 2, 2020                 [Page 3]
+Kitterman                Expires April 16, 2020                 [Page 3]
 
-Internet-Draft                  PSD DMARC                 September 2019
+Internet-Draft                  PSD DMARC                   October 2019
 
 
    to enhance the DMARC algorithm by enabling an agent receiving such a
@@ -221,9 +221,9 @@ Internet-Draft                  PSD DMARC                 September 2019
 
 
 
-Kitterman                 Expires April 2, 2020                 [Page 4]
+Kitterman                Expires April 16, 2020                 [Page 4]
 
-Internet-Draft                  PSD DMARC                 September 2019
+Internet-Draft                  PSD DMARC                   October 2019
 
 
    associated with DMARC [RFC7489] deployment.  These are discussed in
@@ -277,9 +277,9 @@ Internet-Draft                  PSD DMARC                 September 2019
 
 
 
-Kitterman                 Expires April 2, 2020                 [Page 5]
+Kitterman                Expires April 16, 2020                 [Page 5]
 
-Internet-Draft                  PSD DMARC                 September 2019
+Internet-Draft                  PSD DMARC                   October 2019
 
 
 2.5.  PSO Controlled Domain Names
@@ -333,9 +333,9 @@ Internet-Draft                  PSD DMARC                 September 2019
 
 
 
-Kitterman                 Expires April 2, 2020                 [Page 6]
+Kitterman                Expires April 16, 2020                 [Page 6]
 
-Internet-Draft                  PSD DMARC                 September 2019
+Internet-Draft                  PSD DMARC                   October 2019
 
 
    sp:  The sentence 'If absent, the policy specified by the "p" tag
@@ -389,9 +389,9 @@ Internet-Draft                  PSD DMARC                 September 2019
 
 
 
-Kitterman                 Expires April 2, 2020                 [Page 7]
+Kitterman                Expires April 16, 2020                 [Page 7]
 
-Internet-Draft                  PSD DMARC                 September 2019
+Internet-Draft                  PSD DMARC                   October 2019
 
 
    not a mechanism to provide feedback addresses (RUA/RUF) when an
@@ -445,9 +445,9 @@ Internet-Draft                  PSD DMARC                 September 2019
 
 
 
-Kitterman                 Expires April 2, 2020                 [Page 8]
+Kitterman                Expires April 16, 2020                 [Page 8]
 
-Internet-Draft                  PSD DMARC                 September 2019
+Internet-Draft                  PSD DMARC                   October 2019
 
 
       organizational domain would have its feedback reports redirected
@@ -501,9 +501,9 @@ Internet-Draft                  PSD DMARC                 September 2019
 
 
 
-Kitterman                 Expires April 2, 2020                 [Page 9]
+Kitterman                Expires April 16, 2020                 [Page 9]
 
-Internet-Draft                  PSD DMARC                 September 2019
+Internet-Draft                  PSD DMARC                   October 2019
 
 
    +----------+-----------+---------+-------------------------------+
@@ -557,9 +557,9 @@ Internet-Draft                  PSD DMARC                 September 2019
 
 
 
-Kitterman                 Expires April 2, 2020                [Page 10]
+Kitterman                Expires April 16, 2020                [Page 10]
 
-Internet-Draft                  PSD DMARC                 September 2019
+Internet-Draft                  PSD DMARC                   October 2019
 
 
    [RFC6973]  Cooper, A., Tschofenig, H., Aboba, B., Peterson, J.,
@@ -613,9 +613,9 @@ A.1.  PSD DMARC Privacy Concern Mitigation
 
 
 
-Kitterman                 Expires April 2, 2020                [Page 11]
+Kitterman                Expires April 16, 2020                [Page 11]
 
-Internet-Draft                  PSD DMARC                 September 2019
+Internet-Draft                  PSD DMARC                   October 2019
 
 
    technical approach that is demonstrated to be operationally usable
@@ -669,9 +669,9 @@ Appendix B.  DMARC PSD Registry Examples
 
 
 
-Kitterman                 Expires April 2, 2020                [Page 12]
+Kitterman                Expires April 16, 2020                [Page 12]
 
-Internet-Draft                  PSD DMARC                 September 2019
+Internet-Draft                  PSD DMARC                   October 2019
 
 
 B.1.  DMARC PSD DNS Query Service
@@ -725,9 +725,9 @@ B.3.  DMARC PSD PSL Extension
 
 
 
-Kitterman                 Expires April 2, 2020                [Page 13]
+Kitterman                Expires April 16, 2020                [Page 13]
 
-Internet-Draft                  PSD DMARC                 September 2019
+Internet-Draft                  PSD DMARC                   October 2019
 
 
 Appendix C.  Implementations
@@ -781,4 +781,4 @@ Author's Address
 
 
 
-Kitterman                 Expires April 2, 2020                [Page 14]
+Kitterman                Expires April 16, 2020                [Page 14]
