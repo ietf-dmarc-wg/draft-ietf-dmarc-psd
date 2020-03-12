@@ -209,6 +209,10 @@ _dmarc.gov.example.
            <t> The longest PSD is the Organizational Domain with one label
                removed.</t>
        </section>
+       <section title="Organizational Domain">
+           <t> The term Organizational Domains is defined in <xref
+                target="RFC7489">DMARC</xref> Section 3.2.</t>
+       </section>
        <section title="Public Suffix Operator (PSO)">
            <t>A Public Suffix Operator manages operations within its PSD.
            </t>
@@ -216,10 +220,8 @@ _dmarc.gov.example.
        <section title="PSO Controlled Domain Names">
            <t>PSO Controlled Domain Names are names in the DNS that are
                managed by a PSO and are not available for use as Organizational
-               Domains (the term Organizational Domains is defined in <xref
-               target="RFC7489">DMARC</xref> Section 3.2).  Depending on PSD policy, these
-               will have one (e.g., ".com") or more (e.g., ".co.uk") name
-               components.
+               Domains.  Depending on PSD policy, these will have one (e.g.,
+               ".com") or more (e.g., ".co.uk") name components.
            </t>
        </section>
        <section title="Non-existent Domains">
