@@ -404,7 +404,7 @@ _dmarc.gov.example.
 	  Section 12.3, DNS Security, are amplified by PSD DMARC.  In
 	  particular, DNS cache poisoning (or Name Chaining), see <xref
 	  target="RFC3833"/> for details, consequences are increased because a
-	  sucessful attack would potentially have a much wider scope.
+	  successful attack would potentially have a much wider scope.
       </t>
       <t> The risks of the issues identified in <xref target="RFC7489"/>,
 	  Section 12.5, External Reporting Addresses, are amplified by PSD
