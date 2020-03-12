@@ -578,7 +578,9 @@ _dmarc.gov.example.
 +-------------+---------------+
 | .gov.uk     | current       |
 +-------------+---------------+
-                                </artwork> </figure>
+| .mil        | current       |
++-------------+---------------+
+            </artwork> </figure>
            </t>
         </section>
         <section anchor="pslplus" title="DMARC PSD PSL Extension">
