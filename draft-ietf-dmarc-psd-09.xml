@@ -240,7 +240,7 @@ _dmarc.gov.example.
      <section title="General Updates">
          <t>References to "Domain Owners" also apply to PSOs.</t>
      </section>
-     <section title="Section 6.3 General Record Format">
+     <section title='Changes in Section 6.3 "General Record Format"'>
 	 <t>A new tag is added after "fo":</t>
 	 <t><list style="hanging">
 	    <t hangText="np:"> Requested Mail Receiver policy for non-existent
@@ -276,7 +276,7 @@ _dmarc.gov.example.
 	    </t>
          </list></t>
      </section>
-     <section title="Section 6.5.  Domain Owner Actions">
+     <section title='Changes in Section 6.5 "Domain Owner Actions"'>
          <t>In addition to the DMARC domain owner actions, PSOs that require
              use of DMARC and participate in PSD DMARC ought to make that
 	         information available to receivers.  The mechanism for doing so is
@@ -284,7 +284,7 @@ _dmarc.gov.example.
              target="experiment">experiment description</xref>.
          </t>
      </section>
-     <section title="Section 6.6.1.  Extract Author Domain">
+     <section title='Changes in Section 6.6.1 "Extract Author Domain"'>
          <t> Experience with DMARC has shown that some implementations
              short-circuit messages, bypassing DMARC policy application, when
              the domain name extracted by the receiver (from the RFC5322.From)
@@ -297,7 +297,7 @@ _dmarc.gov.example.
              not exempt from DMARC policy application and reporting.
          </t>
      </section>
-     <section title="Section 6.6.3.  Policy Discovery">
+     <section title='Changes in Section 6.6.3 "Policy Discovery"'>
          <t>A new step between step 3 and 4 is added:</t>
          <t><list style="hanging">
                <t hangText="3A.">If the set is now empty and the <xref
@@ -325,11 +325,11 @@ _dmarc.gov.example.
              an Organizational Domain has declined to do so.
          </t>
      </section>
-     <section title="Section 7.  DMARC Feedback">
+     <section title='Changes in Section 7 "DMARC Feedback"'>
          <t> Operational note for PSD DMARC: For PSOs, feedback for non-existent
 	     domains is desirable and useful, just as it is for org-level
 	     DMARC operators.  See <xref target="privacy"/> of this document for
-         discussion of Privacy Considerations.
+             discussion of Privacy Considerations.
          </t>
      </section>
    </section>

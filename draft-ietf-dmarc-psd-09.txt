@@ -86,11 +86,11 @@ Table of Contents
      2.7.  Non-existent Domains  . . . . . . . . . . . . . . . . . .   6
    3.  PSD DMARC Updates to DMARC Requirements . . . . . . . . . . .   6
      3.1.  General Updates . . . . . . . . . . . . . . . . . . . . .   6
-     3.2.  Section 6.3 General Record Format . . . . . . . . . . . .   6
-     3.3.  Section 6.5.  Domain Owner Actions  . . . . . . . . . . .   7
-     3.4.  Section 6.6.1.  Extract Author Domain . . . . . . . . . .   7
-     3.5.  Section 6.6.3.  Policy Discovery  . . . . . . . . . . . .   7
-     3.6.  Section 7.  DMARC Feedback  . . . . . . . . . . . . . . .   8
+     3.2.  Changes in Section 6.3 "General Record Format"  . . . . .   6
+     3.3.  Changes in Section 6.5 "Domain Owner Actions" . . . . . .   7
+     3.4.  Changes in Section 6.6.1 "Extract Author Domain"  . . . .   7
+     3.5.  Changes in Section 6.6.3 "Policy Discovery" . . . . . . .   7
+     3.6.  Changes in Section 7 "DMARC Feedback" . . . . . . . . . .   8
    4.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   8
      4.1.  Feedback leakage  . . . . . . . . . . . . . . . . . . . .   8
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
@@ -312,7 +312,7 @@ Internet-Draft                  PSD DMARC                     April 2020
 
    References to "Domain Owners" also apply to PSOs.
 
-3.2.  Section 6.3 General Record Format
+3.2.  Changes in Section 6.3 "General Record Format"
 
    A new tag is added after "fo":
 
@@ -352,7 +352,7 @@ Internet-Draft                  PSD DMARC                     April 2020
       applicable, the policy specified by the "p" tag MUST be applied
       for subdomains.
 
-3.3.  Section 6.5.  Domain Owner Actions
+3.3.  Changes in Section 6.5 "Domain Owner Actions"
 
    In addition to the DMARC domain owner actions, PSOs that require use
    of DMARC and participate in PSD DMARC ought to make that information
@@ -360,7 +360,7 @@ Internet-Draft                  PSD DMARC                     April 2020
    experimental elements of this document.  See the experiment
    description (Appendix A).
 
-3.4.  Section 6.6.1.  Extract Author Domain
+3.4.  Changes in Section 6.6.1 "Extract Author Domain"
 
    Experience with DMARC has shown that some implementations short-
    circuit messages, bypassing DMARC policy application, when the domain
@@ -372,7 +372,7 @@ Internet-Draft                  PSD DMARC                     April 2020
    Note that domain names that appear on a public suffix list are not
    exempt from DMARC policy application and reporting.
 
-3.5.  Section 6.6.3.  Policy Discovery
+3.5.  Changes in Section 6.6.3 "Policy Discovery"
 
    A new step between step 3 and 4 is added:
 
@@ -405,7 +405,7 @@ Internet-Draft                  PSD DMARC                     April 2020
    not a mechanism to provide feedback addresses (RUA/RUF) when an
    Organizational Domain has declined to do so.
 
-3.6.  Section 7.  DMARC Feedback
+3.6.  Changes in Section 7 "DMARC Feedback"
 
    Operational note for PSD DMARC: For PSOs, feedback for non-existent
    domains is desirable and useful, just as it is for org-level DMARC
