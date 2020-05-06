@@ -14,7 +14,7 @@
      ipr="trust200902">
 
  <front>
-   <title abbrev="PSD DMARC">DMARC (Domain-based Message Authentication, 
+   <title abbrev="PSD DMARC">DMARC (Domain-based Message Authentication,
        Reporting, and Conformance) Extension For PSDs (Public Suffix Domains)
    </title>
 
@@ -30,7 +30,7 @@
 	    <code>20005</code>
 	    <country>United States of America</country>
 	 </postal>
-	    
+
 	 <phone>+1 301 325-5475</phone>
 	 <email>scott@kitterman.com</email>
       </address>
@@ -190,7 +190,7 @@ _dmarc.gov.example.
                Domain names such as ".com" and ".us".  They are not available
                for private registration.  In many cases the public portion of
                the DNS tree is more than one level deep.
-               
+
                The domain name structure consists of a tree of names, each of
                which is made of a sequence of words ("labels") separated by
                period characters.  The root of the tree is simply called ".".
@@ -205,22 +205,25 @@ _dmarc.gov.example.
                and ".org" is its PSD.
            </t>
        </section>
-       <section anchor="lpsd" title="Longest PSD">
-           <t> The longest PSD is the Organizational Domain with one label
-               removed.</t>
-       </section>
        <section title="Organizational Domain">
            <t> The term Organizational Domains is defined in <xref
                 target="RFC7489">DMARC</xref> Section 3.2.</t>
        </section>
+       <section anchor="lpsd" title="Longest PSD">
+           <t> The longest PSD is the Organizational Domain with one label
+               removed.</t>
+       </section>
        <section title="Public Suffix Operator (PSO)">
-           <t>A Public Suffix Operator manages operations within its PSD.
+           <t>A Public Suffix Operator is an organization which manages
+              operations within a PSD, particularly the DNS records published
+              for names at and under that domain name.
            </t>
        </section>
        <section title="PSO Controlled Domain Names">
            <t>PSO Controlled Domain Names are names in the DNS that are
                managed by a PSO and are not available for use as Organizational
-               Domains.  Depending on PSD policy, these will have one (e.g.,
+               Domains.  PSO Controlled Domain Names may have one (e.g., ".com")
+               or more (e.g., ".co.uk") name components, depending on PSD policy. Examples are Depending on PSD policy, these will have one (e.g.,
                ".com") or more (e.g., ".co.uk") name components.
            </t>
        </section>
@@ -279,8 +282,8 @@ _dmarc.gov.example.
      <section title='Changes in Section 6.5 "Domain Owner Actions"'>
          <t>In addition to the DMARC domain owner actions, PSOs that require
              use of DMARC and participate in PSD DMARC ought to make that
-	         information available to receivers.  The mechanism for doing so is
-             one of the experimental elements of this document.  See the <xref
+	         information available to receivers. This document is an experimental
+            mechanism for doing so.  See the [this document] <xref
              target="experiment">experiment description</xref>.
          </t>
      </section>
@@ -303,17 +306,19 @@ _dmarc.gov.example.
                <t hangText="3A.">If the set is now empty and the <xref
                    target="lpsd">longest PSD</xref> of the  Organizational
                    Domain is one that the receiver has determined is acceptable
-		           for PSD DMARC (discussed in the <xref
+		           for PSD DMARC (discussed in the [this document] <xref
                    target="experiment">experiment description</xref>), the Mail
                    Receiver MUST query the DNS for a DMARC TXT record at the DNS
-                   domain matching the <xref target="lpsd">longest PSD</xref> in
+                   domain matching the [this document] <xref target="lpsd">
+                   longest PSD</xref> in
                    place of the RFC5322.From domain in the message (if
                    different).  A possibly empty set of records is returned.
                </t>
          </list> </t>
          <t>As an example, for a message with the Organizational Domain of
              "example.compute.cloudcompany.com.example", the query for PSD DMARC
-             would use "compute.cloudcompany.com.example" as the <xref
+             would use "compute.cloudcompany.com.example" as the [this document]
+             <xref
              target="lpsd">longest PSD</xref>.  The receiver would check to see
              if that PSD is listed in the DMARC PSD Registry, and if so, perform
              the policy lookup at "_dmarc.compute.cloudcompany.com.example".
@@ -328,20 +333,21 @@ _dmarc.gov.example.
      <section title='Changes in Section 7 "DMARC Feedback"'>
          <t> Operational note for PSD DMARC: For PSOs, feedback for non-existent
 	     domains is desirable and useful, just as it is for org-level
-	     DMARC operators.  See <xref target="privacy"/> of this document for
-             discussion of Privacy Considerations.
+	     DMARC operators.  See <xref target="privacy"/> of [this document] for
+             discussion of Privacy Considerations for PSD DMARC.
          </t>
      </section>
    </section>
 
    <section anchor="privacy" title="Privacy Considerations">
       <t>These privacy considerations are developed based on the requirements of
-          <xref target="RFC6973"/>.  The Privacy Considerations of <xref
-          target="RFC7489"/> apply to this document.
+          <xref target="RFC6973"/>.
+          Additionally, the Privacy Considerations of <xref target="RFC7489"/>
+          apply to the mechanisms described by this document.
       </t>
       <section anchor="leakage" title="Feedback leakage">
           <t>Providing feedback reporting to PSOs can, in some cases, create
-              leakage of information outside of an organization to the PSO.
+           information to leak out of an organization to the PSO .
 	      This leakage could potentially be utilized as part of a program
 	      of pervasive surveillance (See <xref target="RFC7624"/>).  There
 	      are roughly three cases to consider:
@@ -384,14 +390,14 @@ _dmarc.gov.example.
               similar to existing Organizational Domains.  Feedback related to
               such cousin domains have a small risk of carrying information
               related to an actual Organizational Domain.  To minimize this
-              potential concern, PSD DMARC feedback is best limited to
+              potential concern, PSD DMARC feedback SHOULD be limited to
               Aggregate Reports.  Feedback Reports carry more detailed
               information and present a greater risk.
           </t>
 	  <t>Due to the inherent Privacy and Security risks associated with
 	      PSD DMARC for Organizational Domains in multi-organization PSDs
 	      that do not particpate in DMARC, any Feedback Reporting related to
-	      multi-organizational PSDs ought to be limited to non-existent
+	      multi-organizational PSDs MUST be limited to non-existent
 	      domains except in cases where the reporter knows that PSO
 	      requires use of DMARC.
 	  </t>
