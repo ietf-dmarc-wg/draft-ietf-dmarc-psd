@@ -91,18 +91,15 @@
          organization that use similar-looking ("cousin") domains such as
          "t4x.gov.example".  These domains are not registered.  Within the
          ".gov.example" public suffix, use of DMARC has been mandated, so
-         "gov.example" publishes the following DMARC record:
+         "gov.example" publishes the following DMARC DNS record:
          <figure><artwork>
-"v=DMARC1; p=reject; rua=mailto:dmarc@dmarc.service.gov.example"
+_dmarc.gov.example.  IN TXT ( "v=DMARC1; p=reject; "
+                              "rua=mailto:dmarc@dmarc.service.gov.example" )
         </artwork></figure>
-         at
-         <figure><artwork>
-_dmarc.gov.example.
-         </artwork></figure>
          This DMARC record provides policy and a reporting destination for
          mail sent from @gov.example. However, due to DMARC's current method
          of discovering and applying policy at the organizational domain
-         level, the non-existent organizational domain of @tax.gov.example
+         level, the non-existent organizational domain of @t4x.gov.example
          does not and cannot fall under a DMARC policy.
      </t>
      <t> Defensively registering all variants of "tax" is obviously not a scalable
@@ -112,13 +109,16 @@ _dmarc.gov.example.
          precluded by the current DMARC algorithm.
      </t>
      <t> This document provides a simple extension to <xref target="RFC7489">DMARC
-         </xref> to allow operators of Public Suffix Domains (PSDs) to express
-	 policy at the level of the PSD that covers all organizational domains
-	 that do not explicitly publish DMARC records, extends the DMARC
-     policy query functionality to detect
-	 and process such a policy, describes receiver feedback for such
-	 policies, and provides controls to mitigate potential privacy
-	 considerations associated with this extension.
+         </xref> to allow operators of Public Suffix Domains (PSDs) to:
+      <list style="symbols">
+        <t>Express policy at the level of the PSD that covers all
+          organizational domains that do not explicitly publish DMARC records</t>
+        <t>Extends the DMARC policy query functionality to detect
+            and process such a policy</t>
+       <t>Describes receiver feedback for such policies</t>
+       <t>Provides controls to mitigate potential privacy considerations
+       associated with this extension</t>
+     </list>
      </t>
      <t>This document also provides a new <xref target="RFC7489">DMARC</xref> tag
 	to indicate requested handling policy for non-existent subdommains.
@@ -187,9 +187,7 @@ _dmarc.gov.example.
            <t> The global Internet Domain Name System (DNS) is documented in
                numerous Requests for Comment (RFC).  It defines a tree of names
                starting with root, ".", immediately below which are Top Level
-               Domain names such as ".com" and ".us".  They are not available
-               for private registration.  In many cases the public portion of
-               the DNS tree is more than one level deep.
+               Domain names such as ".com" and ".us".
 
                The domain name structure consists of a tree of names, each of
                which is made of a sequence of words ("labels") separated by
