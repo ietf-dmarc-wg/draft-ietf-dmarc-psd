@@ -223,8 +223,7 @@ _dmarc.gov.example.
            <t>PSO Controlled Domain Names are names in the DNS that are
                managed by a PSO and are not available for use as Organizational
                Domains.  PSO Controlled Domain Names may have one (e.g., ".com")
-               or more (e.g., ".co.uk") name components, depending on PSD policy. Examples are Depending on PSD policy, these will have one (e.g.,
-               ".com") or more (e.g., ".co.uk") name components.
+               or more (e.g., ".co.uk") name components, depending on PSD policy.
            </t>
        </section>
        <section title="Non-existent Domains">
@@ -346,7 +345,7 @@ _dmarc.gov.example.
           apply to the mechanisms described by this document.
       </t>
       <section anchor="leakage" title="Feedback leakage">
-          <t>Providing feedback reporting to PSOs can, in some cases, create
+          <t>Providing feedback reporting to PSOs can, in some cases, cause
            information to leak out of an organization to the PSO .
 	      This leakage could potentially be utilized as part of a program
 	      of pervasive surveillance (See <xref target="RFC7624"/>).  There
