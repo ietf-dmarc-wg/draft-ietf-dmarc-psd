@@ -346,7 +346,7 @@ _dmarc.gov.example.
       </t>
       <section anchor="leakage" title="Feedback leakage">
           <t>Providing feedback reporting to PSOs can, in some cases, cause
-           information to leak out of an organization to the PSO .
+           information to leak out of an organization to the PSO.
 	      This leakage could potentially be utilized as part of a program
 	      of pervasive surveillance (See <xref target="RFC7624"/>).  There
 	      are roughly three cases to consider:
@@ -396,7 +396,7 @@ _dmarc.gov.example.
 	  <t>Due to the inherent Privacy and Security risks associated with
 	      PSD DMARC for Organizational Domains in multi-organization PSDs
 	      that do not particpate in DMARC, any Feedback Reporting related to
-	      multi-organizational PSDs outght to be limited to non-existent
+	      multi-organizational PSDs ought to be limited to non-existent
 	      domains except in cases where the reporter knows that PSO
 	      requires use of DMARC.
 	  </t>
