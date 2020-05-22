@@ -386,16 +386,17 @@ _dmarc.gov.example.  IN TXT ( "v=DMARC1; p=reject; "
           <t>PSOs will receive feedback on non-existent domains, which may be
               similar to existing Organizational Domains.  Feedback related to
               such cousin domains have a small risk of carrying information
-              related to an actual Organizational Domain.  To minimize this
-              potential concern, PSD DMARC feedback is best limited to
-              Aggregate Reports.  Feedback Reports carry more detailed
+              related to an actual Organizational Domain.  To minimize
+              this potential concern, PSD DMARC feedback MUST be limited
+              to Aggregate Reports. Feedback Reports carry more detailed
               information and present a greater risk.
           </t>
 	  <t>Due to the inherent Privacy and Security risks associated with
 	      PSD DMARC for Organizational Domains in multi-organization PSDs
-	      that do not particpate in DMARC, any Feedback Reporting related to
-	      multi-organizational PSDs ought to be limited to non-existent
-	      domains except in cases where the reporter knows that PSO
+        that do not particpate in DMARC, any Feedback Reporting
+        related to multi-organizational PSDs MUST be limited
+        to non-existent domains
+        except in cases where the reporter knows that PSO
 	      requires use of DMARC.
 	  </t>
        </section>
