@@ -476,30 +476,14 @@ _dmarc.gov.example.  IN TXT ( "v=DMARC1; p=reject; "
 
    </references>
 
-   <section anchor="experiment" title="The Experiment">
-      <t> There are two experimental questions addressed in this document: one
-	  regarding mitigation of PSD related privacy concerns and the other
-	  on the utility of specifying separate DMARC policies for non-existent
-	      sub-domains.</t>
-      <t> Aditionally, as of the writing of this document operational and
-          policy constraints prevent this experiment from being deployed
-          globally. If the experiment shows that PSD DMARC solves a real
-          problem and can be used at a large scale, the results could prove
-          to be useful in removing constraints outside of the IETF that would
-          permit broader deployment.
-      </t>
-      <section title="PSD DMARC Privacy Concern Mitigation">
-      <t> To mitigate the privacy concerns associated with Multi-organization
-	  PSDs that do not mandate DMARC usage, see <xref target="leakage"/>,
-	  a mechanism to indicate which PSDs do not present this privacy risk is
-	  appropriate.  There are multiple approaches that are possible.
-      </t>
-      <t> The experiment is to evaluate different possible approaches.  The
-	  experiment will be complete when there is rough consensus on a
-	  technical approach that is demonstrated to be operationally usable and
-	  effective at mitigating the privacy concern.
-      </t>
-      <t> The mechanism needs the following attributes: </t>
+   <section anchor="experiment"
+    title="PSD DMARC Privacy Concern Mitigation Experiment">
+      <t>The experiment being performed is regarding the mitigation of PSD
+   related privacy concerns associated with multi-organization PSDs
+   that do not mandate DMARC usage, see <xref target="leakage"/>. </t>
+   <t>The experiment present three different approaches to
+    mitigate the privacy risk.Each mechanism studied must have
+    the following attributes:</t>
 	  <t><list style="symbols">
 		  <t> Be reliably, publicly accessible</t>
 		  <t> Be under configuration control based on a public set of
@@ -530,19 +514,6 @@ _dmarc.gov.example.  IN TXT ( "v=DMARC1; p=reject; "
 		  </t>
 		  <t> An IANA registry</t>
 	  </list></t>
-      </section>
-      <section title="Non-Existent Subdomain Policy">
-	<t> PSOs that plan to implement PSD DMARC have indicated that the
-            ability to describe distinct policies for existing and non-
-	    existing sub-domains would facilitate PSD DMARC deployment.  There
-	    are also suggestions that it would be more generally useful for
-	    DMARC.
-	</t>
-	<t> During the period of the experiment, uptake of the new 'np' tag
-	    will be evaluated to support assessment of the utility of
-	    including 'np' in a future, non-experimental update.
-	</t>
-      </section>
    </section>
    <section anchor="registry" title="DMARC PSD Registry Examples">
 	   <t> To facilitate experimentation around data leakage mitigation, samples
