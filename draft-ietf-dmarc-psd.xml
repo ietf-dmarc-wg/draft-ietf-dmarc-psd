@@ -240,7 +240,7 @@ _dmarc.gov.example.  IN TXT ( "v=DMARC1; p=reject; "
      <section title="General Updates">
          <t>References to "Domain Owners" also apply to PSOs.</t>
      </section>
-     <section title='Changes in Section 6.3 "General Record Format"'>
+     <section anchor="genrecfmt" title='Changes in Section 6.3 "General Record Format"'>
 	 <t>A new tag is added after "fo":</t>
 	 <t><list style="hanging">
 	    <t hangText="np:"> Requested Mail Receiver policy for non-existent
@@ -297,7 +297,7 @@ _dmarc.gov.example.  IN TXT ( "v=DMARC1; p=reject; "
              not exempt from DMARC policy application and reporting.
          </t>
      </section>
-     <section title='Changes in Section 6.6.3 "Policy Discovery"'>
+     <section anchor="poldis" title='Changes in Section 6.6.3 "Policy Discovery"'>
          <t>A new step between step 3 and 4 is added:</t>
          <t><list style="hanging">
                <t hangText="3A.">If the set is now empty and the <xref
@@ -479,42 +479,26 @@ _dmarc.gov.example.  IN TXT ( "v=DMARC1; p=reject; "
 
    <section anchor="experiment"
     title="PSD DMARC Privacy Concern Mitigation Experiment">
-      <t>The experiment being performed is regarding the mitigation of PSD
-   related privacy concerns associated with multi-organization PSDs
-   that do not mandate DMARC usage, see <xref target="leakage"/>. </t>
-   <t>The experiment present three different approaches to
-    mitigate the privacy risk.Each mechanism studied must have
-    the following attributes:</t>
-	  <t><list style="symbols">
-		  <t> Be reliably, publicly accessible</t>
-		  <t> Be under configuration control based on a public set of
-		      criteria
-		  </t>
-		  <t> List PSDs that either mandate DMARC for their registrants
-		      or for which all lower level domains are controlled by the
-		      PSO and that the relevant PSO has indicated a desire for
-		      the PSD to participate in PSD DMARC
-		  </t>
-		  <t> Have a small operational footprint (e.g. provide a
-		      documented, lightweight mechanism for developers and
-		      operators to retrieve the list of PSD DMARC participants)
-		  </t>
-		  <t> Not allow PSO to add PSDs to the PSD DMARC participants
-		      list without third party review
-		  </t>
-	  </list></t>
-      <t> As of this writing, three approaches have been proposed.  None of them
-	  are ideal:
-      </t>
-	  <t><list style="symbols">
-		  <t> An extension to the Public Suffix List at <xref
-		      target="PSL"/>
-		  </t>
-		  <t> A dedicated registry queried via DNS - an example of such
-		      a service is described in <xref target="dnsregistry"/> below
-		  </t>
-		  <t> An IANA registry</t>
-	  </list></t>
+
+<t>The experiment being performed has three different questions which are
+looking to be addressed in this document. </t>
+    <t><list style="symbols">
+
+    <t>Section 3.2 modifies policy discovery to add an additional DNS lookup.
+    To determine if this lookup is useful, PSDs will add additional DMARC records
+    in place, and will analyze the DMARC reports.  Success will be determined
+    if a consensus of PSDs that publish DMARC records are able to collect useful data.</t>
+    <t>Section 3.2 adds the "np" tag for non-existent subdomains (DNS NXDOMAIN).
+    PSOs wishing to test this will add this flag to their DMARC record, and will
+    analyze DMARC reports for deployment.  Success will be determined if
+    organizations find explicitly blocking non-existent subdomains domains
+    desirable and provide added value. </t>
+    <t> Section 4.1 discusses three cases where providing feedback could cause
+    information to leak out of an organization.   This experiment will analyze
+    the feedback reports generated for each case to determine if there is
+    information leakage.</t>
+</list></t>
+
    </section>
    <section anchor="registry" title="DMARC PSD Registry Examples">
 	   <t> To facilitate experimentation around data leakage mitigation, samples
