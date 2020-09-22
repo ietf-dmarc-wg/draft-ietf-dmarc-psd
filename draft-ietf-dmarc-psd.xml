@@ -456,15 +456,6 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject; "
       <?rfc include="reference.RFC.7624" ?>
       <?rfc include="reference.RFC.7960" ?>
       <?rfc include="reference.RFC.8020" ?>
-      <reference anchor="PSL" target="https://publicsuffix.org/">
-         <front>
-            <title>Public Suffix List</title>
-            <author>
-               <organization>multiple</organization>
-            </author>
-            <date month="April" year="2019" />
-         </front>
-      </reference>
       <reference anchor="psddmarc.org" target="https://psddmarc.org/">
          <front>
             <title>PSD DMARC Web Site</title>
