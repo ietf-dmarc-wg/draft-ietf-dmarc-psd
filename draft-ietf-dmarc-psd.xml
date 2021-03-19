@@ -35,7 +35,23 @@
       </address>
    </author>
 
-   <date month="January" year="2021" />
+  <author role="editor" initials="T." surname="Wicinski" fullname="Tim Wicinski">
+    <organization></organization>
+    <address>
+    <postal>
+    <street></street>
+    <city>Elkins</city>
+    <code>26241</code>
+    <country>USA</country>
+    <region>WV</region>
+    </postal>
+    <phone></phone>
+    <email>tjw.ietf@gmail.com</email>
+    <uri></uri>
+    </address>
+  </author>
+
+   <date month="March" year="2021" />
 
    <keyword>DMARC</keyword>
    <keyword>email authentication</keyword>
