@@ -10,7 +10,7 @@
 <?rfc subcompact="no"?>
 
 <rfc category="exp"
-     docName="draft-ietf-dmarc-psd-11"
+     docName="draft-ietf-dmarc-psd-12"
      ipr="trust200902">
 
  <front>
@@ -51,7 +51,7 @@
     </address>
   </author>
 
-   <date month="March" year="2021" />
+   <date month="April" year="2021" />
 
    <keyword>DMARC</keyword>
    <keyword>email authentication</keyword>
@@ -83,9 +83,11 @@
         specified for both individual domains and for organizational domains
         and their sub-domains within a single organization.</t>
      <t>To determine the organizational domain for a message under evaluation,
-        and thus where to look for a policy statement, DMARC makes use of a Public Suffix
-        List. The process for doing this can be found in Section 3.2 of the DMARC
-        specification.</t>
+        and thus where to look for a policy statement, DMARC makes use of a public suffix
+        list. The process for doing this can be found in Section 3.2 of the DMARC
+        specification.  Currently the public suffix list being used is the
+        most common one that is maintained by the Mozilla Foundation and made public at
+        <eref target="http://publicsuffix.org">http://publicsuffix.org</eref>.</t>
      <t>In the basic DMARC model, PSDs are not organizational domains
         and are thus not subject to DMARC processing.  In DMARC, domains
         fall into one of three categories: organizational domains,
@@ -94,8 +96,8 @@
         under it.  In some cases, this limitation allows for the abuse
         of non-existent organizational-level domains and hampers
         identification of domain abuse in email.</t>
-     <t>This document specifies experimental updates to the DMARC and PSL
-        algorithm cited above, in an attempt to mitigate this abuse.</t>
+     <t>This document specifies experimental updates to the DMARC
+        specification cited above, in an attempt to mitigate this abuse.</t>
    <section anchor="example" title="Example">
      <t>As an example, imagine a Top-Level Domain (TLD), ".example", that has
         public subdomains for government and commercial use (".gov.example"
@@ -111,7 +113,7 @@
      <t>Within the ".gov.example" public suffix, use of DMARC has been mandated,
         so "gov.example" publishes the following DMARC DNS record:
          <figure><artwork>
-_dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject; "
+_dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
                              "rua=mailto:dmc@dmarc.svc.gov.example" )
         </artwork></figure>
        This DMARC record provides policy and a reporting destination for
@@ -123,11 +125,11 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject; "
        does not and cannot fall under a DMARC policy.
 
      </t>
-     <t> Defensively registering all variants of "tax" is obviously not a scalable
+     <t> Defensively registering all variants of "tax" is not a scalable
          strategy.  The intent of this specification, therefore, is to enhance the
-         DMARC algorithm by enabling an agent receiving such a message to be able to
-         determine that a relevant policy is present at "gov.example", which is
-         precluded by the current DMARC algorithm.
+         DMARC discovery method by enabling an agent receiving such a
+         message to be able to determine that a relevant policy is present at
+         "gov.example", which is precluded by the current DMARC specification.
      </t>
    </section>
    <section anchor="discussion" title="Discussion">
@@ -168,7 +170,8 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject; "
                       effectively Organizational Domains as discussed in <xref
                       target="RFC7489"/>.  They control all
                       subdomains of the tree.  These are effectively private
-                      domains, but listed in the Public Suffix List.  They are
+                      domains, but listed in the current public suffix list.
+                      They are
                       treated as Public for DMARC
                       purposes.  They require the same protections as DMARC
                       Organizational Domains, but are currently unable to
@@ -475,7 +478,7 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject; "
 
    <references title="Informative References">
       <?rfc include="reference.RFC.3833" ?>
-      <?rfc include="reference.RFC.5226" ?>
+      <?rfc include="reference.RFC.8126" ?>
       <?rfc include="reference.RFC.5598" ?>
       <?rfc include="reference.RFC.6973" ?>
       <?rfc include="reference.RFC.7624" ?>
@@ -538,8 +541,8 @@ looking to be addressed in this document. </t>
            <t>Names of PSDs participating in PSD DMARC must be registered this
 	       new registry.  New entries are assigned only for PSDs that
 	       require use of DMARC.  The requirement has to be documented in a
-	       manner that satisfies the terms of Expert Review,per <xref
-	       target="RFC5226"/>.  The Designated Expert needs to confirm that
+	       manner that satisfies the terms of Expert Review, per <xref
+	       target="RFC8126"/>.  The Designated Expert needs to confirm that
 	       provided documentation adequately describes PSD policy to require
 	       domain owners to use DMARC or that all domain owners are part of
 	       a single organization with the PSO.
@@ -561,7 +564,8 @@ looking to be addressed in this document. </t>
            </t>
         </section>
         <section anchor="pslplus" title="DMARC PSD PSL Extension">
-           <t> <xref target="psddmarc.org"/> provides a PSL like file to enable to
+           <t> <xref target="psddmarc.org"/> provides a file formatted like the
+               Public Suffix List (PSL) in order to
                facilitate identification of PSD DMARC participants.  Contents are
                functionally identical to the IANA like registry, but presented in
                a different format.
@@ -592,7 +596,7 @@ looking to be addressed in this document. </t>
 	 </t>
 	 <t>Mostly used for DKIM signing, it can be configured to also verify,
             apply DMARC policies, and send aggregate reports.  For PSD DMARC
-            it uses the PSL extension list approach, which is available from
+            it uses the PSL extension list approach, which is available
             from <xref target="psddmarc.org"/>
          </t>
       </section>
