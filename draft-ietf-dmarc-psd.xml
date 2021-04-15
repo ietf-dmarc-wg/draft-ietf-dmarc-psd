@@ -10,7 +10,7 @@
 <?rfc subcompact="no"?>
 
 <rfc category="exp"
-     docName="draft-ietf-dmarc-psd-12"
+     docName="draft-ietf-dmarc-psd-13"
      ipr="trust200902">
 
  <front>
@@ -78,17 +78,17 @@
 
  <middle>
    <section anchor="intro" title="Introduction">
-     <t>DMARC (<xref target="RFC7489"/>) provides a mechanism for publishing
+     <t>DMARC <xref target="RFC7489"/> provides a mechanism for publishing
         organizational policy information to email receivers.  DMARC allows policy to be
         specified for both individual domains and for organizational domains
         and their sub-domains within a single organization.</t>
      <t>To determine the organizational domain for a message under evaluation,
         and thus where to look for a policy statement, DMARC makes use of a public suffix
         list. The process for doing this can be found in Section 3.2 of the DMARC
-        specification.  Currently the public suffix list being used is the
+        specification.  Currently, the public suffix list being used is the
         most common one that is maintained by the Mozilla Foundation and made public at
         <eref target="http://publicsuffix.org">http://publicsuffix.org</eref>.</t>
-     <t>In the basic DMARC model, PSDs are not organizational domains
+     <t>In the basic DMARC model, Public Suffix Domains (PSDs) are not organizational domains
         and are thus not subject to DMARC processing.  In DMARC, domains
         fall into one of three categories: organizational domains,
         sub-domains of organizational domains, or PSDs.  A PSD can only
@@ -146,19 +146,19 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
      </list>
      </t>
      <t>This document also provides a new DMARC tag
-	to indicate requested handling policy for non-existent subdommains.
+	to indicate requested handling policy for non-existent subdomains.
 	This is provided specifically to support phased deployment of PSD
 	DMARC, but is expected to be useful more generally.  Undesired
 	rejection risks for mail purporting to be from domains that do not
 	exist are substantially lower than for those that do, so the
-	operational risk of requesting harsh policy treatment (e.g. reject) is
+	operational risk of requesting harsh policy treatment (e.g., reject) is
 	lower.
      </t>
      <t>As an additional benefit, the PSD DMARC extension clarifies
 	existing requirements.  Based on the requirements of <xref
         target="RFC7489"/>, DMARC should function above the
-        organizational level for exact domain matches (i.e. if a DMARC record
-        were published for 'example', then mail from example@example should be
+        organizational level for exact domain matches (i.e., if a DMARC record
+        were published for "example", then mail from example@example should be
         subject to DMARC processing).  Testing had revealed that this is not
         consistently applied in different implementations.
      </t>
@@ -212,7 +212,7 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
        </section>
        <section title="Public Suffix Domain (PSD)">
            <t> The global Internet Domain Name System (DNS) is documented in
-               numerous Requests for Comment (RFC).  It defines a tree of names
+               numerous RFCs.  It defines a tree of names
                starting with root, ".", immediately below which are Top Level
                Domain names such as ".com" and ".us".
 
@@ -256,14 +256,15 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
            <t>For DMARC purposes, a non-existent
 	      domain is a domain for which there is an NXDOMAIN or NODATA
 	      response for A, AAAA, and MX records.  This is a broader definition
-	      than that in <xref target="RFC8020">NXDOMAIN</xref>.
+	      than that in <xref target="RFC8020"/>.
            </t>
        </section>
    </section>
 
    <section title="PSD DMARC Updates to DMARC Requirements">
 
-     <t>This document updates DMARC as follows:</t>
+     <t>To participate in this experiment, implementations should
+      interept RFC7489 as follows:</t>
 
      <section title="General Updates">
          <t>References to "Domain Owners" also apply to PSOs.</t>
@@ -277,9 +278,9 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
 	     applies only to non-existent subdomains of the domain queried and
 	     not to either existing subdomains or the domain itself.  Its
 	     syntax is identical to that of the "p" tag defined below.  If
-	     the 'np' tag is absent, the policy specified by the "sp" tag (if
-	     the 'sp' tag is present) or the policy specified by the "p" tag,
-	     if the 'sp' tag is not present, MUST be applied for non-existent
+	     the "np" tag is absent, the policy specified by the "sp" tag (if
+	     the "sp" tag is present) or the policy specified by the "p" tag,
+	     if the "sp" tag is not present, MUST be applied for non-existent
 	     subdomains.  Note that "np" will be ignored for DMARC records
 	     published on subdomains of Organizational Domains and PSDs due to
 	     the effect of the DMARC policy discovery mechanism described in
@@ -298,7 +299,7 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
 	    </t>
 	    <t hangText="sp:">The sentence 'If absent, the policy specified by
 	      the "p" tag MUST be applied for subdomains' is updated to read
-	      'If both the 'sp' tag is absent and the 'np' tag is either absent
+	      'If both the "sp" tag is absent and the "np" tag is either absent
 	      or not applicable, the policy specified by the "p" tag MUST be
 	      applied for subdomains.
 	    </t>
@@ -421,7 +422,7 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
           </t>
 	  <t>Due to the inherent Privacy and Security risks associated with
 	      PSD DMARC for Organizational Domains in multi-organization PSDs
-        that do not particpate in DMARC, any Feedback Reporting
+        that do not participate in DMARC, any Feedback Reporting
         related to multi-organizational PSDs MUST be limited
         to non-existent domains
         except in cases where the reporter knows that PSO
@@ -464,6 +465,7 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
 |          | document  |         | non-existent subdomains       |
 +----------+-----------+---------+-------------------------------+
             </artwork> </figure>
+  [RFC EDITOR: Please replace "This document" with the RFC number of this document.]
            </t>
        </section>
    </section>
@@ -571,7 +573,7 @@ looking to be addressed in this document. </t>
                a different format.
            </t>
 	   <t> When using this approach, the input domain of the extension lookup
-               is supposed to be the output domain of the regular PSL lookup, i.e.
+               is supposed to be the output domain of the regular PSL lookup, i.e.,
                the organizational domain.  This alternative data approach is
                potentially useful since DMARC implementations already need to be
                able to parse the data format, so it should be easier to implement.
