@@ -270,7 +270,8 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
          <t>References to "Domain Owners" also apply to PSOs.</t>
      </section>
      <section anchor="genrecfmt" title='Changes in Section 6.3 "General Record Format"'>
-	 <t>A new tag is added after "fo":</t>
+	 <t>If this experiment is successful, this paragraph is added to this setion.
+    A new tag is added after "fo":</t>
 	 <t><list style="hanging">
 	    <t hangText="np:"> Requested Mail Receiver policy for non-existent
 	     subdomains (plain-text; OPTIONAL).  Indicates the policy to be
@@ -357,6 +358,7 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
          </t>
      </section>
      <section title='Changes in Section 7 "DMARC Feedback"'>
+         <t>If this experiment is successful, this paragraph is added to this setion.</t>
          <t> Operational note for PSD DMARC: For PSOs, feedback for non-existent
 	     domains is desirable and useful, just as it is for org-level
 	     DMARC operators.  See <xref target="privacy"/> of [this document] for
@@ -370,8 +372,9 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
           <xref target="RFC6973"/>.
           Additionally, the Privacy Considerations of <xref target="RFC7489"/>
           apply to the mechanisms described by this document.
+          If this experiment is successful, this section should be
+          incorporated into the Privacy Considerations section as "Feedback leakage".
       </t>
-      <section anchor="leakage" title="Feedback leakage">
           <t>Providing feedback reporting to PSOs can, in some cases, cause
            information to leak out of an organization to the PSO.
 	      This leakage could potentially be utilized as part of a program
@@ -428,7 +431,6 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
         except in cases where the reporter knows that PSO
 	      requires use of DMARC.
 	  </t>
-       </section>
    </section>
 
    <section title="Security Considerations">
@@ -454,7 +456,8 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
 
        <section anchor="iana1" title="Subdomain Policy Tag">
            <t>IANA is requested to add a new tag to DMARC Tag Registry in the Domain-based Message Authentication,
-               Reporting, and Conformance (DMARC) Parameters Registry.
+               Reporting, and Conformance (DMARC) Parameters Registry. The "Status" column is
+               defined in <xref target="RFC7489"/>Section 11.4.
            </t>
            <t>The entry is as follows:
             <figure><artwork>
@@ -540,9 +543,9 @@ looking to be addressed in this document. </t>
 	       Separated Value (CSV) version of the listed PSD domains which is
 	       suitable for use in build updates for PSD DMARC capable software.
            </t>
-           <t>Names of PSDs participating in PSD DMARC must be registered this
-	       new registry.  New entries are assigned only for PSDs that
-	       require use of DMARC.  The requirement has to be documented in a
+           <t>PSDs that are deploying DMARC and are participating in PSD DMARC
+            must be register their public suffix domain in this
+	       new registry.   The requirement has to be documented in a
 	       manner that satisfies the terms of Expert Review, per <xref
 	       target="RFC8126"/>.  The Designated Expert needs to confirm that
 	       provided documentation adequately describes PSD policy to require
