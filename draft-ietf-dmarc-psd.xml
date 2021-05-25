@@ -407,7 +407,7 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
 		      significant.  For non-DMARC Organizational Domains, all
 		      DMARC feedback will be directed to the PSO.  PSD DMARC is
 		      opt-out (by publishing a DMARC record at the
-		      Organizational Domain level) vice opt-in, which would be
+		      Organizational Domain level) instead of opt-in, which would be
 		      the more desirable characteristic.  This means that any
 		      non-DMARC organizational domain would have its feedback
 		      reports redirected to the PSO.  The content of such
@@ -429,7 +429,7 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
         related to multi-organizational PSDs MUST be limited
         to non-existent domains
         except in cases where the reporter knows that PSO
-	      requires use of DMARC.
+	      requires use of DMARC (by checking the DMARC PSD Registry).
 	  </t>
    </section>
 
