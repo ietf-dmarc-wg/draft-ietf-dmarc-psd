@@ -10,7 +10,7 @@
 <?rfc subcompact="no"?>
 
 <rfc category="exp"
-     docName="draft-ietf-dmarc-psd-13"
+     docName="draft-ietf-dmarc-psd-14"
      ipr="trust200902">
 
  <front>
@@ -51,7 +51,7 @@
     </address>
   </author>
 
-   <date month="April" year="2021" />
+   <date month="May" year="2021" />
 
    <keyword>DMARC</keyword>
    <keyword>email authentication</keyword>
@@ -264,13 +264,13 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
    <section title="PSD DMARC Updates to DMARC Requirements">
 
      <t>To participate in this experiment, implementations should
-      interept RFC7489 as follows:</t>
+      interpret RFC7489 as follows:</t>
 
      <section title="General Updates">
          <t>References to "Domain Owners" also apply to PSOs.</t>
      </section>
      <section anchor="genrecfmt" title='Changes in Section 6.3 "General Record Format"'>
-	 <t>If this experiment is successful, this paragraph is added to this setion.
+	 <t>If this experiment is successful, this paragraph is added to this section.
     A new tag is added after "fo":</t>
 	 <t><list style="hanging">
 	    <t hangText="np:"> Requested Mail Receiver policy for non-existent
@@ -358,7 +358,7 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
          </t>
      </section>
      <section title='Changes in Section 7 "DMARC Feedback"'>
-         <t>If this experiment is successful, this paragraph is added to this setion.</t>
+         <t>If this experiment is successful, this paragraph is added to this section.</t>
          <t> Operational note for PSD DMARC: For PSOs, feedback for non-existent
 	     domains is desirable and useful, just as it is for org-level
 	     DMARC operators.  See <xref target="privacy"/> of [this document] for
@@ -544,7 +544,7 @@ looking to be addressed in this document. </t>
 	       suitable for use in build updates for PSD DMARC capable software.
            </t>
            <t>PSDs that are deploying DMARC and are participating in PSD DMARC
-            must be register their public suffix domain in this
+            must register their public suffix domain in this
 	       new registry.   The requirement has to be documented in a
 	       manner that satisfies the terms of Expert Review, per <xref
 	       target="RFC8126"/>.  The Designated Expert needs to confirm that
