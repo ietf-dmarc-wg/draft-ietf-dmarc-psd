@@ -10,7 +10,7 @@
 <?rfc subcompact="no"?>
 
 <rfc category="exp"
-     docName="draft-ietf-dmarc-psd-14"
+     docName="draft-ietf-dmarc-psd-15"
      ipr="trust200902">
 
  <front>
@@ -51,7 +51,7 @@
     </address>
   </author>
 
-   <date month="May" year="2021" />
+   <date month="June" year="2021" />
 
    <keyword>DMARC</keyword>
    <keyword>email authentication</keyword>
@@ -470,6 +470,11 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
             </artwork> </figure>
   [RFC EDITOR: Please replace "This document" with the RFC number of this document.]
            </t>
+           <t>The ABNF associated with this tag is as follows:
+            <figure><artwork>
+             dmarc-nprequest  = "np" *WSP "=" *WSP
+                    ( "none" / "quarantine" / "reject" )
+          </artwork></figure></t>
        </section>
    </section>
  </middle>
