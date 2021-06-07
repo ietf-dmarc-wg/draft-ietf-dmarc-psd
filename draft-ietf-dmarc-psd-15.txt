@@ -5,7 +5,7 @@
 Network Working Group                                       S. Kitterman
 Internet-Draft                                    fTLD Registry Services
 Intended status: Experimental                           T. Wicinski, Ed.
-Expires: December 8, 2021                                   June 6, 2021
+Expires: December 9, 2021                                   June 7, 2021
 
 
          Experimental DMARC Extension For Public Suffix Domains
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 8, 2021.
+   This Internet-Draft will expire on December 9, 2021.
 
 
 
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021                [Page 1]
+Kitterman & Wicinski    Expires December 9, 2021                [Page 1]
 
 Internet-Draft                  PSD DMARC                      June 2021
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021                [Page 2]
+Kitterman & Wicinski    Expires December 9, 2021                [Page 2]
 
 Internet-Draft                  PSD DMARC                      June 2021
 
@@ -165,7 +165,7 @@ Internet-Draft                  PSD DMARC                      June 2021
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021                [Page 3]
+Kitterman & Wicinski    Expires December 9, 2021                [Page 3]
 
 Internet-Draft                  PSD DMARC                      June 2021
 
@@ -221,7 +221,7 @@ Internet-Draft                  PSD DMARC                      June 2021
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021                [Page 4]
+Kitterman & Wicinski    Expires December 9, 2021                [Page 4]
 
 Internet-Draft                  PSD DMARC                      June 2021
 
@@ -277,7 +277,7 @@ Internet-Draft                  PSD DMARC                      June 2021
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021                [Page 5]
+Kitterman & Wicinski    Expires December 9, 2021                [Page 5]
 
 Internet-Draft                  PSD DMARC                      June 2021
 
@@ -333,7 +333,7 @@ Internet-Draft                  PSD DMARC                      June 2021
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021                [Page 6]
+Kitterman & Wicinski    Expires December 9, 2021                [Page 6]
 
 Internet-Draft                  PSD DMARC                      June 2021
 
@@ -381,7 +381,7 @@ Internet-Draft                  PSD DMARC                      June 2021
 
 3.3.  Changes in Section 6.4 "Formal Definition"
 
-   The ABNF for DMARC shall up dated to include a new definition "dmarc-
+   The ABNF for DMARC shall updated to include a new definition "dmarc-
    nprequest" which is defined as:
 
 
@@ -389,7 +389,7 @@ Internet-Draft                  PSD DMARC                      June 2021
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021                [Page 7]
+Kitterman & Wicinski    Expires December 9, 2021                [Page 7]
 
 Internet-Draft                  PSD DMARC                      June 2021
 
@@ -398,7 +398,7 @@ Internet-Draft                  PSD DMARC                      June 2021
                    ( "none" / "quarantine" / "reject" )
 
 
-   The "dmarc-record" defintion is also updated to include the
+   The "dmarc-record" definition is also updated to include the
    following:
 
                  [dmarc-sep dmarc-nprequest]
@@ -445,7 +445,7 @@ Internet-Draft                  PSD DMARC                      June 2021
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021                [Page 8]
+Kitterman & Wicinski    Expires December 9, 2021                [Page 8]
 
 Internet-Draft                  PSD DMARC                      June 2021
 
@@ -501,7 +501,7 @@ Internet-Draft                  PSD DMARC                      June 2021
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021                [Page 9]
+Kitterman & Wicinski    Expires December 9, 2021                [Page 9]
 
 Internet-Draft                  PSD DMARC                      June 2021
 
@@ -557,7 +557,7 @@ Internet-Draft                  PSD DMARC                      June 2021
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021               [Page 10]
+Kitterman & Wicinski    Expires December 9, 2021               [Page 10]
 
 Internet-Draft                  PSD DMARC                      June 2021
 
@@ -613,7 +613,7 @@ Internet-Draft                  PSD DMARC                      June 2021
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021               [Page 11]
+Kitterman & Wicinski    Expires December 9, 2021               [Page 11]
 
 Internet-Draft                  PSD DMARC                      June 2021
 
@@ -669,7 +669,7 @@ Appendix A.  PSD DMARC Privacy Concern Mitigation Experiment
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021               [Page 12]
+Kitterman & Wicinski    Expires December 9, 2021               [Page 12]
 
 Internet-Draft                  PSD DMARC                      June 2021
 
@@ -725,7 +725,7 @@ B.2.  DMARC Public Suffix Domain (PSD) Registry
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021               [Page 13]
+Kitterman & Wicinski    Expires December 9, 2021               [Page 13]
 
 Internet-Draft                  PSD DMARC                      June 2021
 
@@ -781,7 +781,7 @@ C.2.  Zdkimfilter Module
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021               [Page 14]
+Kitterman & Wicinski    Expires December 9, 2021               [Page 14]
 
 Internet-Draft                  PSD DMARC                      June 2021
 
@@ -837,4 +837,4 @@ Authors' Addresses
 
 
 
-Kitterman & Wicinski    Expires December 8, 2021               [Page 15]
+Kitterman & Wicinski    Expires December 9, 2021               [Page 15]
