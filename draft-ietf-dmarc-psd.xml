@@ -10,7 +10,7 @@
 <?rfc subcompact="no"?>
 
 <rfc category="exp"
-     docName="draft-ietf-dmarc-psd-14"
+     docName="draft-ietf-dmarc-psd-15"
      ipr="trust200902">
 
  <front>
@@ -51,7 +51,7 @@
     </address>
   </author>
 
-   <date month="May" year="2021" />
+   <date month="June" year="2021" />
 
    <keyword>DMARC</keyword>
    <keyword>email authentication</keyword>
@@ -306,6 +306,20 @@ _dmarc.gov.example. IN TXT ( "v=DMARC1; p=reject;"
 	    </t>
          </list></t>
      </section>
+     <section title='Changes in Section 6.4 "Formal Definition"'>
+      <t>The ABNF for DMARC shall updated to include a new definition
+        "dmarc-nprequest" which is defined as:
+          <figure><artwork>
+            dmarc-nprequest =  "np" *WSP "=" *WSP
+                ( "none" / "quarantine" / "reject" )
+
+          </artwork></figure>
+          The "dmarc-record" definition is also updated to include the following:
+          <figure><artwork>
+              [dmarc-sep dmarc-nprequest]
+          </artwork></figure>
+      </t>
+    </section>
      <section title='Changes in Section 6.5 "Domain Owner Actions"'>
          <t>In addition to the DMARC domain owner actions, PSOs that require
              use of DMARC and participate in PSD DMARC ought to make that
